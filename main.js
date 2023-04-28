@@ -7,11 +7,14 @@ canvas.height = 600
 const ctx = canvas.getContext('2d')
 
 if (canvas.getContext) {
-  ctx.drawRect(10, 10, 50, 50, 'rgb(200, 0, 0)')
-
+  // Drawing functions demo
   ctx.drawRect(30, 30, 50, 50, 'rgba(0, 0, 200, 0.5)')
 
   ctx.drawCircle(100, 20, 10, null, 2, 'black')
+
+  ctx.rotateDrawing({ x: 75, y: 325 }, Math.PI / 4, () =>
+    ctx.drawRect(50, 300, 50, 50, 'blue')
+  )
 
   ctx.drawPolygon(
     [

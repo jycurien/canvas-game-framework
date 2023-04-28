@@ -56,3 +56,20 @@ CanvasRenderingContext2D.prototype.drawPolygon = function (
     this.stroke()
   }
 }
+
+CanvasRenderingContext2D.prototype.rotateDrawing = function (
+  origin = { x: 0, y: 0 },
+  rotation = 0,
+  drawingFn
+) {
+  this.save()
+  this.translate(origin.x, origin.y)
+
+  this.rotate(rotation)
+
+  this.translate(-origin.x, -origin.y)
+
+  drawingFn()
+
+  this.restore()
+}
