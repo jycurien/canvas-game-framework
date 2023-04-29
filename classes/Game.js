@@ -2,6 +2,7 @@ import '../utils/drawingFunctions'
 import Ball from './Ball'
 import Brick from './Brick'
 import Paddle from './Paddle'
+import { detectRectCollision } from '../utils/collisionDetection'
 
 class Game {
   constructor(canvas) {
@@ -85,7 +86,7 @@ class Game {
       this.ctx.fillStyle = '#0095DD'
       this.ctx.fillText(
         `You win!`,
-        this.canvas.width / 2,
+        this.canvas.width / 2 - 50,
         this.canvas.height / 2 - 12
       )
       return
@@ -115,12 +116,7 @@ class Game {
     }
 
     this.bricks.forEach((brick, index) => {
-      if (
-        this.ball.getRight() > brick.getLeft() &&
-        this.ball.getLeft() < brick.getRight() &&
-        this.ball.getBottom() > brick.getTop() &&
-        this.ball.getTop() < brick.getBottom()
-      ) {
+      if (detectRectCollision(this.ball, brick)) {
         this.ball.velocity.y = -this.ball.velocity.y
         this.bricks.splice(index, 1)
         this.score++
