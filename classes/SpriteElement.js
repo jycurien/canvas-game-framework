@@ -25,8 +25,8 @@ class SpriteElement extends RectangularElement {
     this.scale = scale
   }
 
-  render(tick) {
-    const frame = tick % this.nbFrames
+  render(tick, tickDivider = 1) {
+    const frame = Math.floor(tick / tickDivider) % this.nbFrames
     const x = frame * this.frameWidth
     this.ctx.drawImage(
       this.image,

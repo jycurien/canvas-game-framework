@@ -1,5 +1,7 @@
 import shipImageSrc from '../assets/img/ship-a1.png'
+import enemySmallImageSrc from '../assets/img/enemy-small.png'
 import Player from './Player'
+import Enemy from './Enemy'
 
 class Game {
   constructor(canvas) {
@@ -22,6 +24,23 @@ class Game {
       canvas: this.canvas,
       image: shipImage,
     })
+
+    const enemySmallImage = new Image()
+    enemySmallImage.src = enemySmallImageSrc
+
+    this.enemies = []
+    for (let column = 0; column < 12; column++) {
+      for (let row = 0; row < 2; row++) {
+        this.enemies.push(
+          new Enemy({
+            canvas: this.canvas,
+            image: enemySmallImage,
+            column,
+            row,
+          })
+        )
+      }
+    }
 
     this.main()
   }
@@ -49,6 +68,7 @@ class Game {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.ctx.drawRect(0, 0, this.canvas.width, this.canvas.height, '#000')
     this.player.render(this.tick)
+    this.enemies.forEach((enemy) => enemy.render(this.tick, 4))
   }
 
   update() {
