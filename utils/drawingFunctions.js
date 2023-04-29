@@ -12,6 +12,7 @@ CanvasRenderingContext2D.prototype.drawCircle = function (
   this.fill()
 
   if (lineWidth) {
+    this.lineWidth = lineWidth
     this.strokeStyle = strokeStyle ?? this.strokeStyle
     this.stroke()
   }
@@ -30,6 +31,7 @@ CanvasRenderingContext2D.prototype.drawRect = function (
   this.fillRect(x, y, width, height)
 
   if (lineWidth) {
+    this.lineWidth = lineWidth
     this.strokeStyle = strokeStyle ?? this.strokeStyle
     this.stroke()
   }
@@ -52,8 +54,26 @@ CanvasRenderingContext2D.prototype.drawPolygon = function (
   this.fill()
 
   if (lineWidth) {
+    this.lineWidth = lineWidth
     this.strokeStyle = strokeStyle ?? this.strokeStyle
     this.stroke()
+  }
+}
+
+CanvasRenderingContext2D.prototype.drawPath2d = function (
+  path,
+  fillStyle = null,
+  lineWidth = null,
+  strokeStyle = null
+) {
+  const p = new Path2D(path)
+  this.fillStyle = fillStyle ?? this.fillStyle
+  this.fill(p)
+
+  if (lineWidth) {
+    this.lineWidth = lineWidth
+    this.strokeStyle = strokeStyle ?? this.strokeStyle
+    this.stroke(p)
   }
 }
 
