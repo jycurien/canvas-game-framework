@@ -1,3 +1,5 @@
+import Player from './Player'
+
 class Game {
   constructor(canvas) {
     this.canvas = canvas
@@ -8,6 +10,10 @@ class Game {
     this.stopMain = null
     this.frame = 0
     this.lastFrameTime = 0
+    this.score = 0
+    this.player = new Player({
+      canvas,
+    })
   }
 
   main(tFrame) {
@@ -32,9 +38,12 @@ class Game {
   render() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.ctx.drawRect(0, 0, this.canvas.width, this.canvas.height, '#000')
+    this.player.render()
   }
 
-  update() {}
+  update() {
+    this.player.update()
+  }
 }
 
 export default Game
