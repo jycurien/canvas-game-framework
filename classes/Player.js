@@ -1,9 +1,10 @@
 import RectangularElement from './RectangularElement'
 
 class Player extends RectangularElement {
-  constructor({ canvas }) {
-    const width = 60
-    const height = 40
+  constructor({ canvas, image }) {
+    const scale = 1.2
+    const width = 34 * scale
+    const height = 37 * scale
 
     const position = {
       x: (canvas.width - width) / 2,
@@ -24,6 +25,8 @@ class Player extends RectangularElement {
       fillStyle: 'red',
     })
 
+    this.scale = scale
+    this.image = image
     this.rotation = 0
     this.rightPressed = false
     this.leftPressed = false
@@ -48,14 +51,29 @@ class Player extends RectangularElement {
     }
   }
 
-  render() {
+  render(tick) {
+    const frame = tick % 3
+    const x = frame * 34
+
     this.ctx.rotateDrawing(
       {
         x: this.position.x + this.width / 2,
         y: this.position.y + this.height / 2,
       },
       this.rotation,
-      super.render.bind(this)
+      () => {
+        this.ctx.drawImage(
+          this.image,
+          x,
+          0,
+          this.width / this.scale,
+          this.height / this.scale,
+          this.position.x,
+          this.position.y,
+          this.width,
+          this.height
+        )
+      }
     )
   }
 

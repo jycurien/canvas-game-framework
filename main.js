@@ -8,4 +8,4 @@ canvas.height = 576
 
 let game = new Game(canvas)
 
-game.main()
+game.init()

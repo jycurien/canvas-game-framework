@@ -1,3 +1,4 @@
+import shipImageSrc from '../assets/img/ship-a1.png'
 import Player from './Player'
 
 class Game {
@@ -8,12 +9,21 @@ class Game {
     this.active = true
     this.win = false
     this.stopMain = null
-    this.frame = 0
     this.lastFrameTime = 0
+    this.tick = 0
     this.score = 0
+  }
+
+  init() {
+    const shipImage = new Image()
+    shipImage.src = shipImageSrc
+
     this.player = new Player({
-      canvas,
+      canvas: this.canvas,
+      image: shipImage,
     })
+
+    this.main()
   }
 
   main(tFrame) {
@@ -26,7 +36,7 @@ class Game {
 
     this.update()
 
-    this.frame++
+    this.tick++
 
     this.stopMain = requestAnimationFrame(this.main.bind(this))
 
@@ -38,7 +48,7 @@ class Game {
   render() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.ctx.drawRect(0, 0, this.canvas.width, this.canvas.height, '#000')
-    this.player.render()
+    this.player.render(this.tick)
   }
 
   update() {
