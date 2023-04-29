@@ -37,6 +37,18 @@ CanvasRenderingContext2D.prototype.drawRect = function (
   }
 }
 
+CanvasRenderingContext2D.prototype.drawText = function (
+  text,
+  x,
+  y,
+  font,
+  fillStyle
+) {
+  this.font = font
+  this.fillStyle = fillStyle
+  this.fillText(text, x, y)
+}
+
 CanvasRenderingContext2D.prototype.drawPolygon = function (
   points = [{ x: 0, y: 0 }],
   fillStyle = null,

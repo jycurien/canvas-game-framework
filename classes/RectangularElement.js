@@ -1,4 +1,3 @@
-import '../utils/drawingFunctions'
 import Element from './Element'
 
 class RectangularElement extends Element {

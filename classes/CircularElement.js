@@ -1,4 +1,3 @@
-import '../utils/drawingFunctions'
 import Element from './Element'
 
 class CircularElement extends Element {
