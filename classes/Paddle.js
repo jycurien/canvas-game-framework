@@ -1,28 +1,27 @@
 import RectangularElement from './RectangularElement'
 
 class Paddle extends RectangularElement {
-  constructor({
-    canvas,
-    velocity,
-    width,
-    height,
-    fillStyle = null,
-    lineWidth = null,
-    strokeStyle = null,
-  }) {
+  constructor({ canvas }) {
+    const width = 75
+    const height = 10
+
     const position = {
       x: (canvas.width - width) / 2,
       y: canvas.height - height,
     }
+
+    const velocity = {
+      x: 0,
+      y: 0,
+    }
+
     super({
       canvas,
       position,
       velocity,
       width,
       height,
-      fillStyle,
-      lineWidth,
-      strokeStyle,
+      fillStyle: '#0095DD',
     })
 
     this.rightPressed = false
@@ -84,6 +83,13 @@ class Paddle extends RectangularElement {
     if (this.getRight() > this.canvas.width) {
       this.position.x = this.canvas.width - this.width
     }
+  }
+
+  reset() {
+    this.position.x = (this.canvas.width - this.width) / 2
+    this.position.y = this.canvas.height - this.height
+    this.velocity.x = 0
+    this.velocity.y = 0
   }
 }
 

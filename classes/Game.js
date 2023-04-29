@@ -15,28 +15,12 @@ class Game {
     this.stopMain = null
     this.frame = 0
     this.lastFrameTime = 0
+    this.lives = 3
     this.ball = new Ball({
       canvas,
-      position: {
-        x: canvas.width / 2,
-        y: canvas.height - 30,
-      },
-      velocity: {
-        x: 2,
-        y: -2,
-      },
-      radius: 10,
-      fillStyle: '#0095DD',
     })
     this.paddle = new Paddle({
       canvas,
-      velocity: {
-        x: 0,
-        y: 0,
-      },
-      width: 75,
-      height: 10,
-      fillStyle: '#0095DD',
     })
 
     const bricks = []
@@ -81,6 +65,7 @@ class Game {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.ctx.drawRect(0, 0, this.canvas.width, this.canvas.height, '#000')
     this.drawScore()
+    this.drawLives()
     if (this.over) {
       const txt = this.win ? `You Win!` : `Game Over`
       this.ctx.font = '30px Arial'
@@ -109,11 +94,17 @@ class Game {
       ) {
         this.ball.velocity.y = -this.ball.velocity.y
       } else {
-        this.over = true
-        setTimeout(() => {
-          this.active = false
-          cancelAnimationFrame(this.stopMain)
-        }, 500)
+        this.lives--
+        if (!this.lives) {
+          this.over = true
+          setTimeout(() => {
+            this.active = false
+            cancelAnimationFrame(this.stopMain)
+          }, 500)
+        } else {
+          this.paddle.reset()
+          this.ball.reset()
+        }
       }
     }
 
@@ -136,6 +127,12 @@ class Game {
     this.ctx.font = '16px Arial'
     this.ctx.fillStyle = '#0095DD'
     this.ctx.fillText(`Score: ${this.score}`, 8, 20)
+  }
+
+  drawLives() {
+    this.ctx.font = '16px Arial'
+    this.ctx.fillStyle = '#0095DD'
+    this.ctx.fillText(`Lives: ${this.lives}`, this.canvas.width - 65, 20)
   }
 }
 
