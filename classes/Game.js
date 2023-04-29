@@ -41,7 +41,7 @@ class Game {
 
     const bricks = []
     for (let column = 0; column < 5; column++) {
-      for (let row = 0; row < 3; row++) {
+      for (let row = 0; row < 1; row++) {
         bricks.push(
           new Brick({
             canvas,
@@ -81,16 +81,18 @@ class Game {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.ctx.drawRect(0, 0, this.canvas.width, this.canvas.height, '#000')
     this.drawScore()
-    if (this.win) {
-      this.ctx.font = '24px Arial'
+    if (this.over) {
+      const txt = this.win ? `You Win!` : `Game Over`
+      this.ctx.font = '30px Arial'
       this.ctx.fillStyle = '#0095DD'
       this.ctx.fillText(
-        `You win!`,
-        this.canvas.width / 2 - 50,
-        this.canvas.height / 2 - 12
+        txt,
+        (this.canvas.width - this.ctx.measureText(txt).width) / 2,
+        this.canvas.height / 2
       )
       return
     }
+
     this.ball.render()
     this.paddle.render()
     this.bricks.forEach((brick) => brick.render())
