@@ -7,6 +7,7 @@ class SpriteElement extends RectangularElement {
     velocity,
     image,
     nbFrames = 1,
+    tickDivider = 1,
     frameWidth,
     frameHeight,
     scale,
@@ -25,6 +26,7 @@ class SpriteElement extends RectangularElement {
     })
     this.image = image
     this.nbFrames = nbFrames
+    this.tickDivider = tickDivider
     this.frameWidth = frameWidth
     this.frameHeight = frameHeight
     this.scale = scale
@@ -33,8 +35,8 @@ class SpriteElement extends RectangularElement {
     this.deleteTimeout = null
   }
 
-  render(tick, tickDivider = 1) {
-    const frame = Math.floor(tick / tickDivider) % this.nbFrames
+  render(tick) {
+    const frame = Math.floor(tick / this.tickDivider) % this.nbFrames
     const x = this.origin.x + frame * (this.frameWidth + this.offset)
     this.ctx.drawImage(
       this.image,

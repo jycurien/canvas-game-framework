@@ -1,11 +1,10 @@
-import laserBoltImageSrc from '../assets/img/laser-bolts.png'
-
+import { shipImage, explosionShipImage } from '../images/images'
 import LaserBolt from './LaserBolt'
 import SpriteElement from './SpriteElement'
 
 class Player extends SpriteElement {
-  constructor({ canvas, image, boltImage }) {
-    const scale = 1.2
+  constructor({ canvas }) {
+    const scale = 1
     const width = 34 * scale
     const height = 37 * scale
 
@@ -23,8 +22,9 @@ class Player extends SpriteElement {
       canvas,
       position,
       velocity,
-      image,
+      image: shipImage,
       nbFrames: 3,
+      tickDivider: 1,
       frameWidth: 34,
       frameHeight: 37,
       scale,
@@ -33,9 +33,11 @@ class Player extends SpriteElement {
     this.rotation = 0
     this.rightPressed = false
     this.leftPressed = false
+    this.upPressed = false
+    this.downPressed = false
     this.spacePressed = false
     this.laserBolts = []
-    this.laserBoltImage = boltImage
+    this.explosionImage = explosionShipImage
     this.boltBaseDelay = 10
     this.newBoltTimeout = 0
 
@@ -52,6 +54,14 @@ class Player extends SpriteElement {
       case 'ArrowLeft':
       case 'Left':
         this.leftPressed = true
+        break
+      case 'ArrowUp':
+      case 'Up':
+        this.upPressed = true
+        break
+      case 'ArrowDown':
+      case 'Down':
+        this.downPressed = true
         break
       case ' ':
         this.spacePressed = true
@@ -71,6 +81,14 @@ class Player extends SpriteElement {
       case 'Left':
         this.leftPressed = false
         break
+      case 'ArrowUp':
+      case 'Up':
+        this.upPressed = false
+        break
+      case 'ArrowDown':
+      case 'Down':
+        this.downPressed = false
+        break
       case ' ':
         this.spacePressed = false
         break
@@ -79,18 +97,18 @@ class Player extends SpriteElement {
     }
   }
 
-  render(tick, tickDivider = 1) {
+  render(tick) {
     this.ctx.rotateDrawing(
       {
         x: this.position.x + this.width / 2,
         y: this.position.y + this.height / 2,
       },
       this.rotation,
-      () => super.render(tick, tickDivider)
+      () => super.render(tick)
     )
 
     if (this.laserBolts.length > 0) {
-      this.laserBolts.forEach((laserBolt) => laserBolt.render(tick, 2))
+      this.laserBolts.forEach((laserBolt) => laserBolt.render(tick))
     }
   }
 
@@ -106,6 +124,14 @@ class Player extends SpriteElement {
       this.rotation = 0
     }
 
+    if (this.upPressed) {
+      this.velocity.y = -2
+    } else if (this.downPressed) {
+      this.velocity.y = 2
+    } else {
+      this.velocity.y = 0
+    }
+
     super.update()
 
     if (this.getLeft() < 0) {
@@ -116,11 +142,19 @@ class Player extends SpriteElement {
       this.position.x = this.canvas.width - this.width
     }
 
+    if (this.getTop() < 0) {
+      this.position.y = 0
+    }
+
+    if (this.getBottom() > this.canvas.height) {
+      this.position.y = this.canvas.height - this.height
+    }
+
     this.spacePressed && this.shoot()
 
     this.laserBolts.forEach((laserBolt, index) => {
       laserBolt.update()
-      if (laserBolt.getTop() < 0) {
+      if (laserBolt.getBottom() < 0) {
         this.laserBolts.splice(index, 1)
       }
     })
@@ -131,12 +165,10 @@ class Player extends SpriteElement {
   }
 
   shoot() {
-    console.log('enemy shoot')
     if (this.newBoltTimeout === 0) {
       this.laserBolts.push(
         new LaserBolt({
           canvas: this.canvas,
-          image: this.laserBoltImage,
           position: {
             x: this.position.x + this.width / 2,
             y: this.position.y,

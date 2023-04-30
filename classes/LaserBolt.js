@@ -1,7 +1,8 @@
+import { boltImage } from '../images/images'
 import SpriteElement from './SpriteElement'
 
 class LaserBolt extends SpriteElement {
-  constructor({ canvas, image, position }) {
+  constructor({ canvas, position }) {
     const scale = 2
     const width = 5
 
@@ -21,8 +22,9 @@ class LaserBolt extends SpriteElement {
       canvas,
       position,
       velocity,
-      image,
+      image: boltImage,
       nbFrames: 2,
+      tickDivider: 2,
       frameWidth: 5,
       frameHeight: 12,
       scale,
