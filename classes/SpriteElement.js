@@ -10,6 +10,11 @@ class SpriteElement extends RectangularElement {
     frameWidth,
     frameHeight,
     scale,
+    origin = {
+      x: 0,
+      y: 0,
+    },
+    offset = 0,
   }) {
     super({
       canvas,
@@ -23,15 +28,18 @@ class SpriteElement extends RectangularElement {
     this.frameWidth = frameWidth
     this.frameHeight = frameHeight
     this.scale = scale
+    this.origin = origin
+    this.offset = offset
+    this.deleteTimeout = null
   }
 
   render(tick, tickDivider = 1) {
     const frame = Math.floor(tick / tickDivider) % this.nbFrames
-    const x = frame * this.frameWidth
+    const x = this.origin.x + frame * (this.frameWidth + this.offset)
     this.ctx.drawImage(
       this.image,
       x,
-      0,
+      this.origin.y,
       this.frameWidth,
       this.frameHeight,
       this.position.x,
@@ -39,6 +47,13 @@ class SpriteElement extends RectangularElement {
       this.width,
       this.height
     )
+  }
+
+  update() {
+    super.update()
+    if (this.deleteTimeout > 0) {
+      this.deleteTimeout--
+    }
   }
 }
 

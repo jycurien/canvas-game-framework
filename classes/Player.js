@@ -1,7 +1,10 @@
+import laserBoltImageSrc from '../assets/img/laser-bolts.png'
+
+import LaserBolt from './LaserBolt'
 import SpriteElement from './SpriteElement'
 
 class Player extends SpriteElement {
-  constructor({ canvas, image }) {
+  constructor({ canvas, image, boltImage }) {
     const scale = 1.2
     const width = 34 * scale
     const height = 37 * scale
@@ -30,36 +33,65 @@ class Player extends SpriteElement {
     this.rotation = 0
     this.rightPressed = false
     this.leftPressed = false
+    this.spacePressed = false
+    this.laserBolts = []
+    this.laserBoltImage = boltImage
+    this.boltBaseDelay = 10
+    this.newBoltTimeout = 0
 
     document.addEventListener('keydown', this.keyDownHandler.bind(this), false)
     document.addEventListener('keyup', this.keyUpHandler.bind(this), false)
   }
 
-  keyDownHandler(e) {
-    if (e.key === 'Right' || e.key === 'ArrowRight') {
-      this.rightPressed = true
-    } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
-      this.leftPressed = true
+  keyDownHandler({ key }) {
+    switch (key) {
+      case 'ArrowRight':
+      case 'Right':
+        this.rightPressed = true
+        break
+      case 'ArrowLeft':
+      case 'Left':
+        this.leftPressed = true
+        break
+      case ' ':
+        this.spacePressed = true
+        break
+      default:
+        break
     }
   }
 
-  keyUpHandler(e) {
-    if (e.key === 'Right' || e.key === 'ArrowRight') {
-      this.rightPressed = false
-    } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
-      this.leftPressed = false
+  keyUpHandler({ key }) {
+    switch (key) {
+      case 'ArrowRight':
+      case 'Right':
+        this.rightPressed = false
+        break
+      case 'ArrowLeft':
+      case 'Left':
+        this.leftPressed = false
+        break
+      case ' ':
+        this.spacePressed = false
+        break
+      default:
+        break
     }
   }
 
-  render(tick) {
+  render(tick, tickDivider = 1) {
     this.ctx.rotateDrawing(
       {
         x: this.position.x + this.width / 2,
         y: this.position.y + this.height / 2,
       },
       this.rotation,
-      () => super.render(tick)
+      () => super.render(tick, tickDivider)
     )
+
+    if (this.laserBolts.length > 0) {
+      this.laserBolts.forEach((laserBolt) => laserBolt.render(tick, 2))
+    }
   }
 
   update() {
@@ -82,6 +114,36 @@ class Player extends SpriteElement {
 
     if (this.getRight() > this.canvas.width) {
       this.position.x = this.canvas.width - this.width
+    }
+
+    this.spacePressed && this.shoot()
+
+    this.laserBolts.forEach((laserBolt, index) => {
+      laserBolt.update()
+      if (laserBolt.getTop() < 0) {
+        this.laserBolts.splice(index, 1)
+      }
+    })
+
+    if (this.newBoltTimeout > 0) {
+      this.newBoltTimeout--
+    }
+  }
+
+  shoot() {
+    console.log('enemy shoot')
+    if (this.newBoltTimeout === 0) {
+      this.laserBolts.push(
+        new LaserBolt({
+          canvas: this.canvas,
+          image: this.laserBoltImage,
+          position: {
+            x: this.position.x + this.width / 2,
+            y: this.position.y,
+          },
+        })
+      )
+      this.newBoltTimeout = this.boltBaseDelay
     }
   }
 }

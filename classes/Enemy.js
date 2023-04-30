@@ -1,14 +1,32 @@
+import EnemyBolt from './EnemyBolt'
 import SpriteElement from './SpriteElement'
 
 class Enemy extends SpriteElement {
-  constructor({ canvas, image, column, row }) {
-    const scale = 1
-    const width = 32 * scale
-    const height = 32 * scale
+  constructor({
+    canvas,
+    image,
+    explosionImage,
+    boltImage,
+    column,
+    row,
+    size = 'small',
+  }) {
+    let width = 32
+    let height = 32
+    let colGap = 10
+
+    if (size === 'medium') {
+      width = 64
+      colGap = 20
+    } else if (size === 'big') {
+      width = 50
+      height = 58
+      colGap = 13
+    }
 
     const position = {
-      x: 265 + column * (width * scale + 10),
-      y: 30 + row * (height * scale + 10),
+      x: 260 + colGap / 2 + column * (width + colGap),
+      y: (size !== 'big' ? 46 : 20) + row * (height + 10),
     }
 
     const velocity = {
@@ -22,34 +40,48 @@ class Enemy extends SpriteElement {
       velocity,
       image,
       nbFrames: 2,
-      frameWidth: 32,
-      frameHeight: 32,
-      scale,
+      frameWidth: width,
+      frameHeight: height,
+      scale: 1,
     })
+
+    this.size = size
+    this.explosionImage = explosionImage
+    this.boltImage = boltImage
+    this.laserBolt = null
   }
 
-  // update() {
-  //   if (this.rightPressed) {
-  //     this.velocity.x = 7
-  //     this.rotation = 0.1
-  //   } else if (this.leftPressed) {
-  //     this.velocity.x = -7
-  //     this.rotation = -0.1
-  //   } else {
-  //     this.velocity.x = 0
-  //     this.rotation = 0
-  //   }
+  render(tick, tickDivider = 1) {
+    super.render(tick, tickDivider)
+    this.laserBolt && this.laserBolt.render()
+  }
 
-  //   super.update()
+  update() {
+    super.update()
 
-  //   if (this.getLeft() < 0) {
-  //     this.position.x = 0
-  //   }
+    // if (this.getLeft() < 0) {
+    //   this.position.x = 0
+    // }
 
-  //   if (this.getRight() > this.canvas.width) {
-  //     this.position.x = this.canvas.width - this.width
-  //   }
-  // }
+    // if (this.getRight() > this.canvas.width) {
+    //   this.position.x = this.canvas.width - this.width
+    // }
+
+    this.laserBolt && this.laserBolt.update()
+  }
+
+  shoot() {
+    if (this.laserBolt === null) {
+      this.laserBolt = new EnemyBolt({
+        canvas: this.canvas,
+        image: this.boltImage,
+        position: {
+          x: this.position.x + this.width / 2,
+          y: this.position.y + this.height,
+        },
+      })
+    }
+  }
 }
 
 export default Enemy
