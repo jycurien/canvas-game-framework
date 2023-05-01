@@ -46,10 +46,29 @@ export default class Enemy extends SpriteElement {
   }
 
   render(tick) {
-    this.ctx.save()
-    this.ctx.globalAlpha = this.opacity
+    if (tick % 2 === 0 && this.deleteTimeout === null) {
+      let spread = {
+        x: 0,
+        y: 0,
+      }
+      if (this.type === 'big') {
+        spread = {
+          x: 0,
+          y: -5,
+        }
+      }
+      this.ctx.drawShadow({
+        element: this,
+        offset: {
+          x: 0,
+          y: 5,
+        },
+        spread,
+        fillStyle: 'rgba(0, 0, 0, 0.2)',
+      })
+    }
+
     super.render(tick)
-    this.ctx.restore()
 
     this.laserBolt && this.laserBolt.render(tick)
   }

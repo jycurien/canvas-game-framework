@@ -7,6 +7,7 @@ import explosionSmallImageSrc from '../assets/img/explosion-small.png'
 import explosionMediumImageSrc from '../assets/img/explosion-medium.png'
 import explosionBigImageSrc from '../assets/img/explosion-big.png'
 import boltImageSrc from '../assets/img/laser-bolts.png'
+import desertBackgroundSrc from '../assets/img/desert-background.png'
 
 const shipImage = new Image()
 shipImage.src = shipImageSrc
@@ -26,6 +27,8 @@ const enemySmallImage = new Image()
 enemySmallImage.src = enemySmallImageSrc
 const explosionSmallImage = new Image()
 explosionSmallImage.src = explosionSmallImageSrc
+const desertBackgroundImage = new Image()
+desertBackgroundImage.src = desertBackgroundSrc
 
 export {
   shipImage,
@@ -37,4 +40,5 @@ export {
   explosionMediumImage,
   enemySmallImage,
   explosionSmallImage,
+  desertBackgroundImage,
 }

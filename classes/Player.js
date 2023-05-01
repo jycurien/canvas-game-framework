@@ -1,6 +1,7 @@
 import { shipImage, explosionShipImage } from '../images/images'
 import LaserBolt from './LaserBolt'
 import SpriteElement from './SpriteElement'
+import CircularElement from './CircularElement'
 
 export default class Player extends SpriteElement {
   constructor({ canvas }) {
@@ -104,7 +105,24 @@ export default class Player extends SpriteElement {
         y: this.position.y + this.height / 2,
       },
       this.rotation,
-      () => super.render(tick)
+      () => {
+        if (tick % 2 === 0) {
+          this.ctx.drawShadow({
+            element: this,
+            offset: {
+              x: 0,
+              y: 5,
+            },
+            spread: {
+              x: 0,
+              y: 0,
+            },
+            fillStyle: 'rgba(0, 0, 0, 0.2)',
+          })
+        }
+
+        super.render(tick)
+      }
     )
 
     if (this.laserBolts.length > 0) {
@@ -113,22 +131,27 @@ export default class Player extends SpriteElement {
   }
 
   update() {
-    if (this.rightPressed) {
-      this.velocity.x = 7
-      this.rotation = 0.1
-    } else if (this.leftPressed) {
-      this.velocity.x = -7
-      this.rotation = -0.1
+    if (this.deleteTimeout === null) {
+      if (this.rightPressed) {
+        this.velocity.x = 7
+        this.rotation = 0.1
+      } else if (this.leftPressed) {
+        this.velocity.x = -7
+        this.rotation = -0.1
+      } else {
+        this.velocity.x = 0
+        this.rotation = 0
+      }
+
+      if (this.upPressed) {
+        this.velocity.y = -2
+      } else if (this.downPressed) {
+        this.velocity.y = 2
+      } else {
+        this.velocity.y = 0
+      }
     } else {
       this.velocity.x = 0
-      this.rotation = 0
-    }
-
-    if (this.upPressed) {
-      this.velocity.y = -2
-    } else if (this.downPressed) {
-      this.velocity.y = 2
-    } else {
       this.velocity.y = 0
     }
 

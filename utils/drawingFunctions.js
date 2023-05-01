@@ -105,3 +105,23 @@ CanvasRenderingContext2D.prototype.rotateDrawing = function (
 
   this.restore()
 }
+
+CanvasRenderingContext2D.prototype.drawShadow = function ({
+  element,
+  offset,
+  spread,
+  fillStyle,
+}) {
+  this.fillStyle = fillStyle
+  this.beginPath()
+  this.ellipse(
+    element.position.x + element.width / 2 + offset.x,
+    element.position.y + element.height / 2 + offset.y,
+    element.width / 2 + spread.x,
+    element.height / 2 + spread.y,
+    0,
+    0,
+    Math.PI * 2
+  )
+  this.fill()
+}
