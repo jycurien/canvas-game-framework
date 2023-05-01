@@ -36,12 +36,8 @@ class Game {
           'small',
           'small',
           'small',
-          'small',
-          'small',
         ],
         [
-          'small',
-          'small',
           'small',
           'small',
           'small',
@@ -173,7 +169,7 @@ class Game {
           },
         })
       )
-      this.enemySpawnDelay = Math.floor(Math.random() * 500) + 500
+      this.enemySpawnDelay = Math.floor(Math.random() * 500) + 300
     }
   }
 }

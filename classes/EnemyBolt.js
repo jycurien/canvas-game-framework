@@ -1,7 +1,7 @@
 import { boltImage } from '../images/images'
 import SpriteElement from './SpriteElement'
 
-class EnemyBolt extends SpriteElement {
+export default class EnemyBolt extends SpriteElement {
   constructor({ canvas, position }) {
     const scale = 2
     const width = 5
@@ -33,5 +33,3 @@ class EnemyBolt extends SpriteElement {
     })
   }
 }
-
-export default EnemyBolt

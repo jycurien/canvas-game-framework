@@ -9,7 +9,7 @@ import {
 import EnemyBolt from './EnemyBolt'
 import SpriteElement from './SpriteElement'
 
-class Enemy extends SpriteElement {
+export default class Enemy extends SpriteElement {
   constructor({ canvas, position, velocity, type = 'small' }) {
     let width = 32
     let height = 32
@@ -77,5 +77,3 @@ class Enemy extends SpriteElement {
     }
   }
 }
-
-export default Enemy

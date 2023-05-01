@@ -1,6 +1,6 @@
 import Element from './Element'
 
-class RectangularElement extends Element {
+export default class RectangularElement extends Element {
   constructor({
     canvas,
     position,
@@ -47,5 +47,3 @@ class RectangularElement extends Element {
     return this.position.y + this.height
   }
 }
-
-export default RectangularElement

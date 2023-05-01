@@ -1,7 +1,7 @@
 import Element from './Element'
 import Enemy from './Enemy'
 
-class EnemyWave extends Element {
+export default class EnemyWave extends Element {
   constructor({ canvas, position, velocity, formation, horizontalBoundaries }) {
     super({ canvas, position, velocity })
 
@@ -113,5 +113,3 @@ class EnemyWave extends Element {
     }
   }
 }
-
-export default EnemyWave

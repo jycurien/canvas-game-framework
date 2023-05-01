@@ -2,7 +2,7 @@ import { shipImage, explosionShipImage } from '../images/images'
 import LaserBolt from './LaserBolt'
 import SpriteElement from './SpriteElement'
 
-class Player extends SpriteElement {
+export default class Player extends SpriteElement {
   constructor({ canvas }) {
     const scale = 1
     const width = 34 * scale
@@ -179,5 +179,3 @@ class Player extends SpriteElement {
     }
   }
 }
-
-export default Player

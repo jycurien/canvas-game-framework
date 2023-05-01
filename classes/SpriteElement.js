@@ -1,6 +1,6 @@
 import RectangularElement from './RectangularElement'
 
-class SpriteElement extends RectangularElement {
+export default class SpriteElement extends RectangularElement {
   constructor({
     canvas,
     position,
@@ -58,5 +58,3 @@ class SpriteElement extends RectangularElement {
     }
   }
 }
-
-export default SpriteElement

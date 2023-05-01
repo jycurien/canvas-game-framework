@@ -1,4 +1,4 @@
-class Element {
+export default class Element {
   constructor({
     canvas,
     position = { x: 0, y: 0 },
@@ -17,5 +17,3 @@ class Element {
     this.position.y += this.velocity.y
   }
 }
-
-export default Element

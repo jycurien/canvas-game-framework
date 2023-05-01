@@ -1,6 +1,6 @@
 import Element from './Element'
 
-class CircularElement extends Element {
+export default class CircularElement extends Element {
   constructor({
     canvas,
     position,
@@ -44,5 +44,3 @@ class CircularElement extends Element {
     return this.position.y + this.radius
   }
 }
-
-export default CircularElement

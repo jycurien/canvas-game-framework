@@ -1,7 +1,7 @@
 import { boltImage } from '../images/images'
 import SpriteElement from './SpriteElement'
 
-class LaserBolt extends SpriteElement {
+export default class LaserBolt extends SpriteElement {
   constructor({ canvas, position }) {
     const scale = 2
     const width = 5
@@ -33,5 +33,3 @@ class LaserBolt extends SpriteElement {
     })
   }
 }
-
-export default LaserBolt
