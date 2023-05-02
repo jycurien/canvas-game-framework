@@ -42,6 +42,8 @@ export default class EnemyWave extends Element {
         }
       })
     })
+    this.left = this.getLeft()
+    this.right = this.getRight()
   }
 
   getLeft() {
@@ -62,23 +64,23 @@ export default class EnemyWave extends Element {
     return sortedEnemies[0].getRight()
   }
 
-  getTop() {
-    const sortedEnemies = [
-      ...this.enemies.sort(
-        (enemy1, enemy2) => enemy1.getTop() - enemy2.getTop()
-      ),
-    ]
-    return sortedEnemies[0].getTop()
-  }
+  // getTop() {
+  //   const sortedEnemies = [
+  //     ...this.enemies.sort(
+  //       (enemy1, enemy2) => enemy1.getTop() - enemy2.getTop()
+  //     ),
+  //   ]
+  //   return sortedEnemies[0].getTop()
+  // }
 
-  getBottom() {
-    const sortedEnemies = [
-      ...this.enemies.sort(
-        (enemy1, enemy2) => enemy2.getBottom() - enemy1.getBottom()
-      ),
-    ]
-    return sortedEnemies[0].getBottom()
-  }
+  // getBottom() {
+  //   const sortedEnemies = [
+  //     ...this.enemies.sort(
+  //       (enemy1, enemy2) => enemy2.getBottom() - enemy1.getBottom()
+  //     ),
+  //   ]
+  //   return sortedEnemies[0].getBottom()
+  // }
 
   render(ctx, tick) {
     if (this.enemies.length > 0) {
@@ -87,12 +89,14 @@ export default class EnemyWave extends Element {
   }
 
   update() {
+    this.left += this.velocity.x
+    this.right += this.velocity.x
     if (this.enemies.length > 0) {
-      if (this.getLeft() < this.horizontalBoundaries.left) {
+      if (this.left < this.horizontalBoundaries.left) {
         this.enemies.forEach((enemy) => {
           enemy.velocity.x = 3
         })
-      } else if (this.getRight() > this.horizontalBoundaries.right) {
+      } else if (this.right > this.horizontalBoundaries.right) {
         this.enemies.forEach((enemy) => {
           enemy.velocity.x = -3
         })

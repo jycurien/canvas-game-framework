@@ -8,14 +8,14 @@ export default class Level {
     number,
     background,
     enemyFormations,
-    nbFormationsToNextLevel,
+    scoreToNextLevel,
   }) {
     this.canvas = canvas
     this.player = player
     this.number = number
     this.background = background
     this.enemyFormations = enemyFormations
-    this.nbFormationsToNextLevel = nbFormationsToNextLevel
+    this.scoreToNextLevel = this.player.score + scoreToNextLevel
     this.enemySpawnDelay = 60
     this.enemyWaves = []
     this.over = false
@@ -77,7 +77,7 @@ export default class Level {
           },
         })
       )
-      this.enemySpawnDelay = Math.floor(Math.random() * 500) + 300
+      this.enemySpawnDelay = Math.floor(Math.random() * 200) + 200
     }
 
     this.enemyWaves.forEach((enemyWave, enemyWaveIndex) => {
@@ -119,11 +119,9 @@ export default class Level {
           enemy.opacity = 0
           if (enemy.laserBolt === null) {
             enemyWave.enemies.splice(enemyIndex, 1)
-            if (enemyWave.enemies.length === 0) {
-              this.nbFormationsToNextLevel--
-              if (this.nbFormationsToNextLevel <= 0) {
-                this.over = true
-              }
+
+            if (this.player.score >= this.scoreToNextLevel) {
+              this.over = true
             }
           }
         }

@@ -52,7 +52,7 @@ const levels = [
       ],
       [['big', 'big', 'big', 'big', 'big']],
     ],
-    nbFormationsToNextLevel: 3,
+    scoreToNextLevel: 1000,
   },
   {
     number: 2,
@@ -76,26 +76,10 @@ const levels = [
         [null, 'big', 'big', null],
       ],
       [
-        [
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-        ],
-        [
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-        ],
+        ['medium', 'medium'],
+        ['small', 'small', 'small', 'small'],
+        ['small', 'small', 'small', 'small'],
+        ['medium', 'medium'],
       ],
       [
         ['medium', 'medium', null, 'medium', 'medium'],
@@ -103,7 +87,7 @@ const levels = [
       ],
       [['big', 'big', 'big', 'big', 'big']],
     ],
-    nbFormationsToNextLevel: 4,
+    scoreToNextLevel: 2000,
   },
 ]
 
@@ -112,7 +96,7 @@ const getLevels = (index, canvas, player) => {
     return null
   }
 
-  const { number, background, enemyFormations, nbFormationsToNextLevel } =
+  const { number, background, enemyFormations, scoreToNextLevel } =
     levels[index]
 
   return new Level({
@@ -128,7 +112,7 @@ const getLevels = (index, canvas, player) => {
       frameHeight: background.frameHeight,
     }),
     enemyFormations,
-    nbFormationsToNextLevel,
+    scoreToNextLevel,
   })
 }
 

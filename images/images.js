@@ -1,3 +1,4 @@
+import lifeImageSrc from '../assets/img/life.png'
 import shipImageSrc from '../assets/img/ship-a1.png'
 import explosionShipImageSrc from '../assets/img/explosion-ship.png'
 import enemySmallImageSrc from '../assets/img/enemy-small.png'
@@ -10,6 +11,8 @@ import boltImageSrc from '../assets/img/laser-bolts.png'
 import desertBackgroundSrc from '../assets/img/desert-background.png'
 import riverBackgroundSrc from '../assets/img/river-background.png'
 
+const lifeImage = new Image()
+lifeImage.src = lifeImageSrc
 const shipImage = new Image()
 shipImage.src = shipImageSrc
 const explosionShipImage = new Image()
@@ -34,6 +37,7 @@ const riverBackgroundImage = new Image()
 riverBackgroundImage.src = riverBackgroundSrc
 
 export {
+  lifeImage,
   shipImage,
   explosionShipImage,
   boltImage,

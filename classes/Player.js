@@ -130,8 +130,6 @@ export default class Player extends SpriteElement {
     if (this.laserBolts.length > 0) {
       this.laserBolts.forEach((laserBolt) => laserBolt.render(ctx, tick))
     }
-
-    this.drawLives(ctx)
   }
 
   update() {
@@ -224,21 +222,5 @@ export default class Player extends SpriteElement {
     this.velocity.y = 0
     this.deleteTimeout = null
     this.invicibleTimeout = 120
-  }
-
-  drawLives(ctx) {
-    for (let i = 0; i < this.lives; i++) {
-      ctx.drawImage(
-        shipImage,
-        0,
-        this.origin.y,
-        this.frameWidth,
-        this.frameHeight,
-        10 + 20 * i,
-        10,
-        this.width / 2,
-        this.height / 2
-      )
-    }
   }
 }
