@@ -80,9 +80,9 @@ export default class EnemyWave extends Element {
     return sortedEnemies[0].getBottom()
   }
 
-  render(tick) {
+  render(ctx, tick) {
     if (this.enemies.length > 0) {
-      this.enemies.forEach((enemy) => enemy.render(tick))
+      this.enemies.forEach((enemy) => enemy.render(ctx, tick))
     }
   }
 

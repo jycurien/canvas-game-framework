@@ -5,12 +5,11 @@ export default class Element {
     velocity = { x: 0, y: 0 },
   }) {
     this.canvas = canvas
-    this.ctx = canvas.getContext('2d')
     this.position = position
     this.velocity = velocity
   }
 
-  render() {}
+  render(ctx, tick) {}
 
   update() {
     this.position.x += this.velocity.x

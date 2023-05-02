@@ -40,6 +40,7 @@ export default class Player extends SpriteElement {
     this.explosionImage = explosionShipImage
     this.boltBaseDelay = 10
     this.newBoltTimeout = 0
+    this.score = 0
     this.lives = 3
     this.invicibleTimeout = 0
 
@@ -99,9 +100,9 @@ export default class Player extends SpriteElement {
     }
   }
 
-  render(tick) {
+  render(ctx, tick) {
     this.nbFrames = this.invicibleTimeout > 0 ? 6 : 3
-    this.ctx.rotateDrawing(
+    ctx.rotateDrawing(
       {
         x: this.position.x + this.width / 2,
         y: this.position.y + this.height / 2,
@@ -109,7 +110,7 @@ export default class Player extends SpriteElement {
       this.rotation,
       () => {
         if (tick % 3 === 0 && this.deleteTimeout === null) {
-          this.ctx.drawShadow({
+          ctx.drawShadow({
             element: this,
             offset: {
               x: 0,
@@ -122,15 +123,15 @@ export default class Player extends SpriteElement {
             fillStyle: 'rgba(0, 0, 0, 0.2)',
           })
         }
-        super.render(tick)
+        super.render(ctx, tick)
       }
     )
 
     if (this.laserBolts.length > 0) {
-      this.laserBolts.forEach((laserBolt) => laserBolt.render(tick))
+      this.laserBolts.forEach((laserBolt) => laserBolt.render(ctx, tick))
     }
 
-    this.drawLives()
+    this.drawLives(ctx)
   }
 
   update() {
@@ -225,9 +226,9 @@ export default class Player extends SpriteElement {
     this.invicibleTimeout = 120
   }
 
-  drawLives() {
+  drawLives(ctx) {
     for (let i = 0; i < this.lives; i++) {
-      this.ctx.drawImage(
+      ctx.drawImage(
         shipImage,
         0,
         this.origin.y,

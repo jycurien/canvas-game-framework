@@ -23,11 +23,11 @@ export default class Background extends SpriteElement {
     this.offCanvasWidth = this.frameWidth - canvas.width
   }
 
-  render(tick) {
+  render(ctx, tick) {
     const positionY = this.position.y
-    super.render(tick)
+    super.render(ctx, tick)
     this.position.y -= this.canvas.height
-    super.render(tick)
+    super.render(ctx, tick)
     this.position.y = positionY
   }
 

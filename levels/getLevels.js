@@ -2,11 +2,10 @@ import { desertBackgroundImage, riverBackgroundImage } from '../images/images'
 import Background from '../classes/Background'
 import Level from '../classes/Level'
 
-const getLevels = (canvas) => [
-  new Level({
+const levels = [
+  {
     number: 1,
-    background: new Background({
-      canvas,
+    background: {
       position: {
         x: -76,
         y: 0,
@@ -18,7 +17,7 @@ const getLevels = (canvas) => [
       image: desertBackgroundImage,
       frameWidth: 753,
       frameHeight: 800,
-    }),
+    },
     enemyFormations: [
       [
         [null, 'big', 'big', null],
@@ -54,11 +53,10 @@ const getLevels = (canvas) => [
       [['big', 'big', 'big', 'big', 'big']],
     ],
     nbFormationsToNextLevel: 3,
-  }),
-  new Level({
+  },
+  {
     number: 2,
-    background: new Background({
-      canvas,
+    background: {
       position: {
         x: -20,
         y: 0,
@@ -70,7 +68,7 @@ const getLevels = (canvas) => [
       image: riverBackgroundImage,
       frameWidth: 640,
       frameHeight: 800,
-    }),
+    },
     enemyFormations: [
       [
         [null, 'big', 'big', null],
@@ -106,7 +104,32 @@ const getLevels = (canvas) => [
       [['big', 'big', 'big', 'big', 'big']],
     ],
     nbFormationsToNextLevel: 4,
-  }),
+  },
 ]
+
+const getLevels = (index, canvas, player) => {
+  if (index > levels.length - 1) {
+    return null
+  }
+
+  const { number, background, enemyFormations, nbFormationsToNextLevel } =
+    levels[index]
+
+  return new Level({
+    canvas,
+    player,
+    number,
+    background: new Background({
+      canvas,
+      position: background.position,
+      velocity: background.velocity,
+      image: background.image,
+      frameWidth: background.frameWidth,
+      frameHeight: background.frameHeight,
+    }),
+    enemyFormations,
+    nbFormationsToNextLevel,
+  })
+}
 
 export default getLevels

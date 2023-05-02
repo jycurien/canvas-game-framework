@@ -52,7 +52,7 @@ export default class Enemy extends SpriteElement {
     this.points = enemyPoints[type]
   }
 
-  render(tick) {
+  render(ctx, tick) {
     if (tick % 3 === 0 && this.deleteTimeout === null) {
       let spread = {
         x: 0,
@@ -64,7 +64,7 @@ export default class Enemy extends SpriteElement {
           y: -5,
         }
       }
-      this.ctx.drawShadow({
+      ctx.drawShadow({
         element: this,
         offset: {
           x: 0,
@@ -75,9 +75,9 @@ export default class Enemy extends SpriteElement {
       })
     }
 
-    super.render(tick)
+    super.render(ctx, tick)
 
-    this.laserBolt && this.laserBolt.render(tick)
+    this.laserBolt && this.laserBolt.render(ctx, tick)
   }
 
   update() {

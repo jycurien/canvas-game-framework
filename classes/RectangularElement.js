@@ -19,8 +19,8 @@ export default class RectangularElement extends Element {
     this.strokeStyle = strokeStyle
   }
 
-  render() {
-    this.ctx.drawRect(
+  render(ctx, tick) {
+    ctx.drawRect(
       this.position.x,
       this.position.y,
       this.width,

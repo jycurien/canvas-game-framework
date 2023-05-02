@@ -17,8 +17,8 @@ export default class CircularElement extends Element {
     this.strokeStyle = strokeStyle
   }
 
-  render() {
-    this.ctx.drawCircle(
+  render(ctx, tick) {
+    ctx.drawCircle(
       this.position.x,
       this.position.y,
       this.radius,
