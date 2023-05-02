@@ -9,7 +9,6 @@ class Game {
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
     this.over = false
-    this.active = true
     this.isWon = false
     this.stopMain = null
     this.lastFrameTime = 0
@@ -25,7 +24,7 @@ class Game {
   main(tFrame) {
     this.render()
 
-    if (!this.active) {
+    if (this.over) {
       cancelAnimationFrame(this.stopMain)
       return
     }
@@ -49,14 +48,6 @@ class Game {
   }
 
   update() {
-    // if (this.over) {
-    //   this.inactiveTimeout--
-    // }
-
-    // if (this.inactiveTimeout <= 0) {
-    //   this.active = false
-    // }
-
     this.level.update()
 
     if (this.level.over) {
@@ -64,7 +55,6 @@ class Game {
       const newLevel = getLevels(this.levelIndex, this.canvas, this.player)
       if (newLevel === null) {
         this.over = true
-        this.active = false
         this.isWon = true
       } else {
         this.level = newLevel
@@ -78,11 +68,10 @@ class Game {
         this.player.reset()
       } else {
         this.over = true
-        this.active = false
       }
     }
 
-    if (this.over && !this.active) {
+    if (this.over) {
       this.ui.message = this.isWon
         ? '✨ Congratulations! You Win! ✨'
         : 'Game Over'

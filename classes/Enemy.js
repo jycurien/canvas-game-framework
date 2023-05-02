@@ -10,9 +10,9 @@ import EnemyBolt from './EnemyBolt'
 import SpriteElement from './SpriteElement'
 
 const enemyPoints = {
-  small: 30,
+  small: 10,
   medium: 20,
-  big: 10,
+  big: 30,
 }
 
 export default class Enemy extends SpriteElement {
@@ -21,16 +21,19 @@ export default class Enemy extends SpriteElement {
     let height = 32
     let image = enemySmallImage
     let explosionImage = explosionSmallImage
+    let maxLifePoints = 1
 
     if (type === 'medium') {
       width = 64
       image = enemyMediumImage
       explosionImage = explosionMediumImage
+      maxLifePoints = 2
     } else if (type === 'big') {
       width = 50
       height = 58
       image = enemyBigImage
       explosionImage = explosionBigImage
+      maxLifePoints = 4
     }
 
     super({
@@ -46,42 +49,56 @@ export default class Enemy extends SpriteElement {
     })
 
     this.type = type
+    this.maxLifePoints = maxLifePoints
+    this.lifePoints = maxLifePoints
     this.explosionImage = explosionImage
     this.laserBolt = null
     this.opacity = 1
     this.points = enemyPoints[type]
+    this.hit = false
   }
 
   render(ctx, tick) {
+    // Draw shadow
     if (tick % 3 === 0 && this.deleteTimeout === null) {
-      let spread = {
+      let offset = {
         x: 0,
         y: 0,
       }
       if (this.type === 'big') {
-        spread = {
+        offset = {
           x: 0,
-          y: -5,
+          y: 10,
         }
       }
       ctx.drawShadow({
         element: this,
-        offset: {
-          x: 0,
-          y: 5,
+        offset,
+        spread: {
+          x: 5,
+          y: 0,
         },
-        spread,
         fillStyle: 'rgba(0, 0, 0, 0.2)',
       })
     }
 
-    super.render(ctx, tick)
-
     this.laserBolt && this.laserBolt.render(ctx, tick)
+
+    if (this.hit) {
+      this.hit = false
+      return
+    }
+    super.render(ctx, tick)
   }
 
   update() {
     super.update()
+
+    if (this.lifePoints === 0 && this.deleteTimeout === null) {
+      this.image = this.explosionImage
+      this.nbFrames = 5
+      this.deleteTimeout = 20
+    }
 
     if (this.laserBolt !== null) {
       this.laserBolt.update()

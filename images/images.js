@@ -10,6 +10,7 @@ import explosionBigImageSrc from '../assets/img/explosion-big.png'
 import boltImageSrc from '../assets/img/laser-bolts.png'
 import desertBackgroundSrc from '../assets/img/desert-background.png'
 import riverBackgroundSrc from '../assets/img/river-background.png'
+import spaceBackgroundSrc from '../assets/img/space-background.png'
 
 const lifeImage = new Image()
 lifeImage.src = lifeImageSrc
@@ -35,6 +36,8 @@ const desertBackgroundImage = new Image()
 desertBackgroundImage.src = desertBackgroundSrc
 const riverBackgroundImage = new Image()
 riverBackgroundImage.src = riverBackgroundSrc
+const spaceBackgroundImage = new Image()
+spaceBackgroundImage.src = spaceBackgroundSrc
 
 export {
   lifeImage,
@@ -49,4 +52,5 @@ export {
   explosionSmallImage,
   desertBackgroundImage,
   riverBackgroundImage,
+  spaceBackgroundImage,
 }

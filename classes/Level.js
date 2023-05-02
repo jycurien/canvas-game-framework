@@ -19,6 +19,7 @@ export default class Level {
     this.enemySpawnDelay = 60
     this.enemyWaves = []
     this.over = false
+    this.spawnBossDelay = null
   }
 
   render(ctx, tick) {
@@ -48,36 +49,44 @@ export default class Level {
     }
 
     // Spawn enemies
-    if (this.enemySpawnDelay > 0 && this.enemyWaves.length > 0) {
-      this.enemySpawnDelay--
-    } else if (!this.over) {
-      const formation =
-        this.enemyFormations[
-          Math.floor(Math.random() * this.enemyFormations.length)
-        ]
-      const x = (Math.random() * this.canvas.width) / 2
-      this.enemyWaves.push(
-        new EnemyWave({
-          canvas: this.canvas,
-          position: {
-            x: x,
-            y: -10,
-          },
-          velocity: {
-            x: Math.random() - 0.5 > 0 ? 3 : -3,
-            y: Math.random() * 2 + 2,
-          },
-          formation,
-          horizontalBoundaries: {
-            left: Math.max(-100, x - (Math.random() * 100 + 100)),
-            right: Math.min(
-              this.canvas.width + 100,
-              x + (Math.random() * 100 + 400)
-            ),
-          },
-        })
-      )
-      this.enemySpawnDelay = Math.floor(Math.random() * 200) + 200
+    if (this.spawnBossDelay === null) {
+      if (this.enemySpawnDelay > 0 && this.enemyWaves.length > 0) {
+        this.enemySpawnDelay--
+      } else if (!this.over) {
+        const formation =
+          this.enemyFormations[
+            Math.floor(Math.random() * this.enemyFormations.length)
+          ]
+        const x = (Math.random() * this.canvas.width) / 2
+        this.enemyWaves.push(
+          new EnemyWave({
+            canvas: this.canvas,
+            position: {
+              x: x,
+              y: -10,
+            },
+            velocity: {
+              x: Math.random() - 0.5 > 0 ? 3 : -3,
+              y: Math.random() * 2 + 2,
+            },
+            formation,
+            horizontalBoundaries: {
+              left: Math.max(-100, x - (Math.random() * 100 + 100)),
+              right: Math.min(
+                this.canvas.width + 100,
+                x + (Math.random() * 100 + 400)
+              ),
+            },
+          })
+        )
+        this.enemySpawnDelay = Math.floor(Math.random() * 200) + 200
+      }
+    } else if (this.spawnBossDelay > 0) {
+      this.spawnBossDelay--
+    } else {
+      this.background.velocity.y = 0
+      // TODO SPAWN BOSS
+      this.over = true
     }
 
     this.enemyWaves.forEach((enemyWave, enemyWaveIndex) => {
@@ -85,28 +94,31 @@ export default class Level {
 
       enemyWave.enemies.forEach((enemy, enemyIndex) => {
         // Player laser hits enemy
-        if (this.player.laserBolts.length > 0 && enemy.deleteTimeout === null) {
+        if (this.player.laserBolts.length > 0 && enemy.lifePoints > 0) {
           this.player.laserBolts.forEach((laserBolt, laserBoltIndex) => {
             if (detectRectCollision(laserBolt, enemy)) {
               this.player.laserBolts.splice(laserBoltIndex, 1)
-              enemy.image = enemy.explosionImage
-              enemy.nbFrames = 5
-              enemy.deleteTimeout = 20
-              this.player.score += enemy.points
+              enemy.lifePoints--
+              if (enemy.lifePoints === 0) {
+                this.player.score += enemy.points
+              } else {
+                enemy.hit = true
+              }
             }
           })
         }
 
-        // Player collides with
+        // Player collides with enemy
         if (
           this.player.invicibleTimeout === 0 &&
           this.player.deleteTimeout === null &&
-          enemy.deleteTimeout === null &&
+          enemy.lifePoints > 0 &&
           detectRectCollision(this.player, enemy)
         ) {
-          enemy.image = enemy.explosionImage
-          enemy.nbFrames = 5
-          enemy.deleteTimeout = 20
+          enemy.lifePoints--
+          if (enemy.lifePoints === 0) {
+            this.player.score += enemy.points
+          }
           enemy.laserBolt = null
           this.player.image = this.player.explosionImage
           this.player.nbFrames = 5
@@ -121,7 +133,7 @@ export default class Level {
             enemyWave.enemies.splice(enemyIndex, 1)
 
             if (this.player.score >= this.scoreToNextLevel) {
-              this.over = true
+              this.spawnBossDelay = 200
             }
           }
         }
