@@ -1,7 +1,6 @@
 import { shipImage, explosionShipImage } from '../images/images'
 import LaserBolt from './LaserBolt'
 import SpriteElement from './SpriteElement'
-import CircularElement from './CircularElement'
 
 export default class Player extends SpriteElement {
   constructor({ canvas }) {
@@ -41,6 +40,8 @@ export default class Player extends SpriteElement {
     this.explosionImage = explosionShipImage
     this.boltBaseDelay = 10
     this.newBoltTimeout = 0
+    this.lives = 3
+    this.invicibleTimeout = 0
 
     document.addEventListener('keydown', this.keyDownHandler.bind(this), false)
     document.addEventListener('keyup', this.keyUpHandler.bind(this), false)
@@ -99,6 +100,7 @@ export default class Player extends SpriteElement {
   }
 
   render(tick) {
+    this.nbFrames = this.invicibleTimeout > 0 ? 6 : 3
     this.ctx.rotateDrawing(
       {
         x: this.position.x + this.width / 2,
@@ -106,7 +108,7 @@ export default class Player extends SpriteElement {
       },
       this.rotation,
       () => {
-        if (tick % 2 === 0) {
+        if (tick % 3 === 0 && this.deleteTimeout === null) {
           this.ctx.drawShadow({
             element: this,
             offset: {
@@ -120,7 +122,6 @@ export default class Player extends SpriteElement {
             fillStyle: 'rgba(0, 0, 0, 0.2)',
           })
         }
-
         super.render(tick)
       }
     )
@@ -128,6 +129,8 @@ export default class Player extends SpriteElement {
     if (this.laserBolts.length > 0) {
       this.laserBolts.forEach((laserBolt) => laserBolt.render(tick))
     }
+
+    this.drawLives()
   }
 
   update() {
@@ -185,6 +188,10 @@ export default class Player extends SpriteElement {
     if (this.newBoltTimeout > 0) {
       this.newBoltTimeout--
     }
+
+    if (this.invicibleTimeout > 0) {
+      this.invicibleTimeout--
+    }
   }
 
   shoot() {
@@ -199,6 +206,38 @@ export default class Player extends SpriteElement {
         })
       )
       this.newBoltTimeout = this.boltBaseDelay
+    }
+  }
+
+  reset() {
+    if (this.lives <= 0) {
+      return
+    }
+    this.opacity = 1
+    this.image = shipImage
+    this.nbFrames = 6
+    this.tickDivider = 1
+    this.position.x = (this.canvas.width - this.width) / 2
+    this.position.y = this.canvas.height - this.height - 20
+    this.velocity.x = 0
+    this.velocity.y = 0
+    this.deleteTimeout = null
+    this.invicibleTimeout = 120
+  }
+
+  drawLives() {
+    for (let i = 0; i < this.lives; i++) {
+      this.ctx.drawImage(
+        shipImage,
+        0,
+        this.origin.y,
+        this.frameWidth,
+        this.frameHeight,
+        10 + 20 * i,
+        10,
+        this.width / 2,
+        this.height / 2
+      )
     }
   }
 }

@@ -1,8 +1,8 @@
 import { detectRectCollision } from '../utils/collisionDetection'
-import { desertBackgroundImage } from '../images/images'
+
 import Player from './Player'
 import EnemyWave from './EnemyWave'
-import Background from './Background'
+import getLevels from '../levels/getLevels'
 
 class Game {
   constructor(canvas) {
@@ -22,54 +22,8 @@ class Game {
     })
     this.enemyWaves = []
     this.enemySpawnDelay = 60
-    ;(this.enemyFormations = [
-      [
-        [null, 'big', 'big', null],
-        ['medium', null, 'medium'],
-        ['small', 'small', 'small', 'small', 'small', 'small'],
-      ],
-      [
-        [
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-        ],
-        [
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-          'small',
-        ],
-      ],
-      [
-        ['medium', 'medium', 'medium', 'medium', 'medium'],
-        ['medium', 'medium', 'medium', 'medium', 'medium'],
-      ],
-      [['big', 'big', 'big', 'big', 'big']],
-    ]),
-      (this.background = new Background({
-        canvas,
-        position: {
-          x: -76,
-          y: 0,
-        },
-        velocity: {
-          x: 0,
-          y: 2,
-        },
-        image: desertBackgroundImage,
-        frameWidth: 753,
-        frameHeight: 800,
-      }))
+    this.levels = getLevels(canvas)
+    this.levelIndex = 0
   }
 
   main(tFrame) {
@@ -92,11 +46,16 @@ class Game {
   }
 
   render() {
+    if (this.over && !this.active) {
+      this.drawEndScreen()
+      return
+    }
+
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-    this.background.render(this.tick)
-    // this.ctx.drawRect(0, 0, this.canvas.width, this.canvas.height, '#000')
+    this.levels[this.levelIndex].render(this.tick)
     this.player.render(this.tick)
     this.enemyWaves.forEach((enemyWave) => enemyWave.render(this.tick))
+    this.drawScore()
   }
 
   update() {
@@ -109,22 +68,26 @@ class Game {
     // }
 
     this.player.update()
-    this.background.update()
+    this.levels[this.levelIndex].update()
 
     // Background horizontal scroll
     if (
-      (this.player.position.x > this.background.offCanvasWidth / 2 &&
+      (this.player.position.x >
+        this.levels[this.levelIndex].background.offCanvasWidth / 2 &&
         this.player.velocity.x < 0 &&
-        this.background.getLeft() < this.player.velocity.x) ||
+        this.levels[this.levelIndex].background.getLeft() <
+          this.player.velocity.x) ||
       (this.player.position.x <
-        this.canvas.width - this.background.offCanvasWidth / 2 &&
+        this.canvas.width -
+          this.levels[this.levelIndex].background.offCanvasWidth / 2 &&
         this.player.velocity.x > 0 &&
-        this.background.getRight() > this.canvas.width)
+        this.levels[this.levelIndex].background.getRight() > this.canvas.width)
     ) {
-      this.background.velocity.x =
-        -this.player.velocity.x / this.background.hSpeedScrollDivider
+      this.levels[this.levelIndex].background.velocity.x =
+        -this.player.velocity.x /
+        this.levels[this.levelIndex].background.hSpeedScrollDivider
     } else {
-      this.background.velocity.x = 0
+      this.levels[this.levelIndex].background.velocity.x = 0
     }
 
     this.enemyWaves.forEach((enemyWave, enemyWaveIndex) => {
@@ -137,11 +100,17 @@ class Game {
               enemy.image = enemy.explosionImage
               enemy.nbFrames = 5
               enemy.deleteTimeout = 20
+              this.score += enemy.points
             }
           })
         }
 
-        if (detectRectCollision(this.player, enemy)) {
+        if (
+          this.player.invicibleTimeout === 0 &&
+          this.player.deleteTimeout === null &&
+          enemy.deleteTimeout === null &&
+          detectRectCollision(this.player, enemy)
+        ) {
           enemy.image = enemy.explosionImage
           enemy.nbFrames = 5
           enemy.deleteTimeout = 20
@@ -150,17 +119,34 @@ class Game {
           this.player.nbFrames = 5
           this.player.tickDivider = 2
           this.player.deleteTimeout = 20
+          this.score += enemy.points
         }
 
         if (enemy.deleteTimeout !== null && enemy.deleteTimeout === 0) {
           enemy.opacity = 0
           if (enemy.laserBolt === null) {
             enemyWave.enemies.splice(enemyIndex, 1)
+            if (enemyWave.enemies.length === 0) {
+              this.levels[this.levelIndex].nbFormationsToNextLevel--
+              if (this.levels[this.levelIndex].nbFormationsToNextLevel <= 0) {
+                if (this.levelIndex >= this.levels.length - 1) {
+                  this.over = true
+                  this.active = false
+                  this.win = true
+                } else {
+                  this.levelIndex++
+                }
+              }
+            }
           }
         }
 
         if (enemy.laserBolt !== null) {
-          if (detectRectCollision(enemy.laserBolt, this.player)) {
+          if (
+            this.player.invicibleTimeout === 0 &&
+            this.player.deleteTimeout === null &&
+            detectRectCollision(enemy.laserBolt, this.player)
+          ) {
             enemy.laserBolt = null
             this.player.image = this.player.explosionImage
             this.player.nbFrames = 5
@@ -177,10 +163,12 @@ class Game {
 
     if (this.enemySpawnDelay > 0 && this.enemyWaves.length > 0) {
       this.enemySpawnDelay--
-    } else {
+    } else if (!this.over) {
       const formation =
-        this.enemyFormations[
-          Math.floor(Math.random() * this.enemyFormations.length)
+        this.levels[this.levelIndex].enemyFormations[
+          Math.floor(
+            Math.random() * this.levels[this.levelIndex].enemyFormations.length
+          )
         ]
       const x = (Math.random() * this.canvas.width) / 2
       this.enemyWaves.push(
@@ -209,10 +197,39 @@ class Game {
 
     if (this.player.deleteTimeout !== null && this.player.deleteTimeout === 0) {
       this.player.opacity = 0
-      this.over = true
-      this.active = false
-      // TODO substract lives and reset or game over
+      if (this.player.lives > 0) {
+        this.player.lives--
+        this.player.reset()
+      } else {
+        this.over = true
+        this.active = false
+      }
     }
+  }
+
+  drawScore() {
+    const txt = `Score: ${this.score.toString().padStart(5, '0')}`
+
+    this.ctx.font = '14px Arial'
+    this.ctx.fillStyle = 'rgba(255, 255, 255, 0.7'
+    this.ctx.fillText(
+      txt,
+      this.canvas.width / 2 - this.ctx.measureText(txt).width / 2,
+      24
+    )
+  }
+
+  drawEndScreen() {
+    this.ctx.drawRect(0, 0, this.canvas.width, this.canvas.height, '#000')
+    this.drawScore()
+    const txt = this.win ? 'Congratulations! You Win!' : 'Game Over'
+    this.ctx.font = '30px Arial'
+    this.ctx.fillStyle = '#fff'
+    this.ctx.fillText(
+      txt,
+      this.canvas.width / 2 - this.ctx.measureText(txt).width / 2,
+      this.canvas.height / 2
+    )
   }
 }
 

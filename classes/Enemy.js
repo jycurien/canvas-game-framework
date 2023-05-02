@@ -9,6 +9,12 @@ import {
 import EnemyBolt from './EnemyBolt'
 import SpriteElement from './SpriteElement'
 
+const enemyPoints = {
+  small: 30,
+  medium: 20,
+  big: 10,
+}
+
 export default class Enemy extends SpriteElement {
   constructor({ canvas, position, velocity, type = 'small' }) {
     let width = 32
@@ -43,10 +49,11 @@ export default class Enemy extends SpriteElement {
     this.explosionImage = explosionImage
     this.laserBolt = null
     this.opacity = 1
+    this.points = enemyPoints[type]
   }
 
   render(tick) {
-    if (tick % 2 === 0 && this.deleteTimeout === null) {
+    if (tick % 3 === 0 && this.deleteTimeout === null) {
       let spread = {
         x: 0,
         y: 0,

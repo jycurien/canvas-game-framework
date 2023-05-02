@@ -39,8 +39,11 @@ export default class SpriteElement extends RectangularElement {
   render(tick) {
     const frame = Math.floor(tick / this.tickDivider) % this.nbFrames
     const x = this.origin.x + frame * (this.frameWidth + this.offset)
-    this.ctx.save()
-    this.ctx.globalAlpha = this.opacity
+    if (this.opacity === 0) {
+      this.ctx.save()
+      this.ctx.globalAlpha = this.opacity
+    }
+
     this.ctx.drawImage(
       this.image,
       x,
@@ -52,7 +55,10 @@ export default class SpriteElement extends RectangularElement {
       this.width,
       this.height
     )
-    this.ctx.restore()
+
+    if (this.opacity === 0) {
+      this.ctx.restore()
+    }
   }
 
   update() {
