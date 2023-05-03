@@ -5,20 +5,19 @@ import Ui from './Ui'
 class Game {
   constructor(canvas) {
     this.ui = new Ui()
-    this.message = null
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
-    this.over = false
+    this.over = true
     this.isWon = false
     this.stopMain = null
     this.lastFrameTime = 0
     this.tick = 0
-    // this.inactiveTimeout = 30
     this.player = new Player({
       canvas: this.canvas,
     })
     this.levelIndex = 0
     this.level = getLevels(0, canvas, this.player)
+    // this.inactiveTimeout = 30
   }
 
   main(tFrame) {
@@ -75,9 +74,26 @@ class Game {
       this.ui.message = this.isWon
         ? '✨ Congratulations! You Win! ✨'
         : 'Game Over'
+      this.ui.message += '<br/><br/>Press Enter to Start'
       this.ui.backgroundColor = '#000'
       this.ui.opacity = 1
     }
+  }
+
+  init() {
+    this.ui.backgroundColor = 'transparent'
+    this.ui.opacity = 0.8
+    this.ui.message = ''
+    this.over = false
+    this.player = new Player({
+      canvas: this.canvas,
+    })
+    this.levelIndex = 0
+    this.level = getLevels(0, this.canvas, this.player)
+    if (this.stopMain) {
+      cancelAnimationFrame(this.stopMain)
+    }
+    this.main()
   }
 }
 

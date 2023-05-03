@@ -7,7 +7,7 @@ export default class Ui {
     this.topCenterContainer = document.querySelector('#topCenter')
     this.topRightContainer = document.querySelector('#topRight')
     this.messageContainer = document.querySelector('#message')
-    this.message = null
+    this.message = ''
     this.backgroundColor = 'transparent'
     this.opacity = 0.8
     this.playerLivesCache = null
@@ -26,8 +26,6 @@ export default class Ui {
     this.topCenterContainer.textContent = `Score: ${player.score
       .toString()
       .padStart(5, '0')}`
-    if (this.message !== null) {
-      this.messageContainer.textContent = this.message
-    }
+    this.messageContainer.innerHTML = this.message
   }
 }

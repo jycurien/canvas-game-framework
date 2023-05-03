@@ -56,7 +56,7 @@ const levels = [
       ],
       [['big', 'big', 'big', 'big', 'big']],
     ],
-    scoreToNextLevel: 100,
+    scoreToNextLevel: 1000,
   },
   {
     number: 2,
@@ -91,7 +91,7 @@ const levels = [
       ],
       [['big', 'big', 'big', 'big', 'big']],
     ],
-    scoreToNextLevel: 200,
+    scoreToNextLevel: 2000,
   },
   {
     number: 3,
@@ -144,8 +144,8 @@ const getLevels = (index, canvas, player) => {
     number,
     background: new Background({
       canvas,
-      position: background.position,
-      velocity: background.velocity,
+      position: { ...background.position },
+      velocity: { ...background.velocity },
       image: background.image,
       frameWidth: background.frameWidth,
       frameHeight: background.frameHeight,
