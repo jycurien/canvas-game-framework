@@ -30,7 +30,7 @@ const enemyData = {
     maxLifePoints: 2,
     width: 64,
     height: 32,
-    colGap: 10,
+    colGap: 20,
   },
   3: {
     type: 3,
@@ -62,12 +62,12 @@ export default class EnemyWave extends Element {
     this.enemies = []
     this.horizontalBoundaries = horizontalBoundaries
     let rowPositionY = this.position.y
-    let rowHeight = 32
+    let rowHeight = 42
     formation.forEach((row) => {
       row.forEach((enemyType, columnIndex) => {
-        const data = enemyData[enemyType]
         if (enemyType) {
-          rowHeight = data.height + 12
+          const data = enemyData[enemyType]
+          rowHeight = data.height + 10
           const enemyPosition = {
             x:
               position.x +

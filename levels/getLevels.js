@@ -72,6 +72,11 @@ const levels = [
         [2, null, 2, null, 2],
       ],
       [[3, 3, 3, 3, 3]],
+      [
+        [3, null, 3],
+        [null, 4, null],
+        [3, null, 3],
+      ],
     ],
     scoreToNextLevel: 2000,
   },
@@ -102,11 +107,12 @@ const levels = [
         [1, 1, 1, 1],
         [2, 2],
       ],
-      [
-        [2, 2, null, 2, 2],
-        [2, null, 2, null, 2],
-      ],
       [[3, 3, 3, 3, 3]],
+      [
+        [4, null, 4],
+        [null, 4, null],
+        [4, null, 4],
+      ],
     ],
     scoreToNextLevel: 200,
   },
