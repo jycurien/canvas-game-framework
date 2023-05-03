@@ -17,7 +17,6 @@ class Game {
     })
     this.levelIndex = 0
     this.level = getLevels(0, canvas, this.player)
-    // this.inactiveTimeout = 30
   }
 
   main(tFrame) {
@@ -60,14 +59,8 @@ class Game {
       }
     }
 
-    if (this.player.deleteTimeout !== null && this.player.deleteTimeout === 0) {
-      this.player.opacity = 0
-      if (this.player.lives > 0) {
-        this.player.lives--
-        this.player.reset()
-      } else {
-        this.over = true
-      }
+    if (this.player.lives <= 0) {
+      this.over = true
     }
 
     if (this.over) {

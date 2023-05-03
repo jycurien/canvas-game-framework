@@ -1,6 +1,7 @@
 import { shipImage, explosionShipImage } from '../images/images'
 import LaserBolt from './LaserBolt'
 import SpriteElement from './SpriteElement'
+import playAudio from '../audio/audio'
 
 export default class Player extends SpriteElement {
   constructor({ canvas }) {
@@ -38,10 +39,14 @@ export default class Player extends SpriteElement {
     this.spacePressed = false
     this.laserBolts = []
     this.explosionImage = explosionShipImage
+    this.shootSoundSrc = '../assets/audio/laser-shoot.wav'
+    this.explosionSoundSrc = '../assets/audio/explosion.wav'
     this.boltBaseDelay = 10
     this.newBoltTimeout = 0
     this.score = 0
     this.lives = 3
+    this.maxLifePoints = 1
+    this.lifePoints = this.maxLifePoints
     this.invicibleTimeout = 0
 
     document.addEventListener('keydown', this.keyDownHandler.bind(this), false)
@@ -133,6 +138,22 @@ export default class Player extends SpriteElement {
   }
 
   update() {
+    if (this.deleteTimeout !== null && this.deleteTimeout === 0) {
+      this.opacity = 0
+      if (this.lives > 0) {
+        this.lives--
+        this.reset()
+        return
+      }
+    }
+
+    if (this.lifePoints === 0 && this.deleteTimeout === null) {
+      this.image = this.explosionImage
+      this.nbFrames = 5
+      this.tickDivider = 2
+      this.deleteTimeout = 20
+    }
+
     if (this.deleteTimeout === null) {
       if (this.rightPressed) {
         this.velocity.x = 7
@@ -177,13 +198,6 @@ export default class Player extends SpriteElement {
 
     this.spacePressed && this.shoot()
 
-    this.laserBolts.forEach((laserBolt, index) => {
-      laserBolt.update()
-      if (laserBolt.getBottom() < 0) {
-        this.laserBolts.splice(index, 1)
-      }
-    })
-
     if (this.newBoltTimeout > 0) {
       this.newBoltTimeout--
     }
@@ -191,6 +205,13 @@ export default class Player extends SpriteElement {
     if (this.invicibleTimeout > 0) {
       this.invicibleTimeout--
     }
+
+    this.laserBolts.forEach((laserBolt, index) => {
+      laserBolt.update()
+      if (laserBolt.getBottom() < 0) {
+        this.laserBolts.splice(index, 1)
+      }
+    })
   }
 
   shoot() {
@@ -204,6 +225,7 @@ export default class Player extends SpriteElement {
           },
         })
       )
+      playAudio({ src: this.shootSoundSrc, volume: 0.01, loop: false })
       this.newBoltTimeout = this.boltBaseDelay
     }
   }
@@ -212,6 +234,7 @@ export default class Player extends SpriteElement {
     if (this.lives <= 0) {
       return
     }
+    this.lifePoints = this.maxLifePoints
     this.opacity = 1
     this.image = shipImage
     this.nbFrames = 6

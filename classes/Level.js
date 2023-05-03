@@ -120,10 +120,7 @@ export default class Level {
             this.player.score += enemy.points
           }
           enemy.laserBolt = null
-          this.player.image = this.player.explosionImage
-          this.player.nbFrames = 5
-          this.player.tickDivider = 2
-          this.player.deleteTimeout = 20
+          this.player.lifePoints--
           this.player.score += enemy.points
         }
 
@@ -146,10 +143,7 @@ export default class Level {
             detectRectCollision(enemy.laserBolt, this.player)
           ) {
             enemy.laserBolt = null
-            this.player.image = this.player.explosionImage
-            this.player.nbFrames = 5
-            this.player.tickDivider = 2
-            this.player.deleteTimeout = 20
+            this.player.lifePoints--
           }
         }
       })
