@@ -79,6 +79,13 @@ body {
 #message {
   font-size: 2rem;
   text-align: center;
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.2;
+  }
 }
 
 #bottomBar {

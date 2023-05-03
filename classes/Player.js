@@ -152,6 +152,7 @@ export default class Player extends SpriteElement {
       this.nbFrames = 5
       this.tickDivider = 2
       this.deleteTimeout = 20
+      playAudio({ src: this.explosionSoundSrc, volume: 0.01, loop: false })
     }
 
     if (this.deleteTimeout === null) {

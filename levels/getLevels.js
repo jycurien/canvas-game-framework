@@ -56,7 +56,7 @@ const levels = [
       ],
       [['big', 'big', 'big', 'big', 'big']],
     ],
-    scoreToNextLevel: 1000,
+    scoreToNextLevel: 200,
   },
   {
     number: 2,
@@ -91,7 +91,7 @@ const levels = [
       ],
       [['big', 'big', 'big', 'big', 'big']],
     ],
-    scoreToNextLevel: 2000,
+    scoreToNextLevel: 200,
   },
   {
     number: 3,
@@ -126,11 +126,11 @@ const levels = [
       ],
       [['big', 'big', 'big', 'big', 'big']],
     ],
-    scoreToNextLevel: 3000,
+    scoreToNextLevel: 200,
   },
 ]
 
-const getLevels = (index, canvas, player) => {
+const getLevels = (index, ui, canvas, player) => {
   if (index > levels.length - 1) {
     return null
   }
@@ -139,6 +139,7 @@ const getLevels = (index, canvas, player) => {
     levels[index]
 
   return new Level({
+    ui,
     canvas,
     player,
     number,

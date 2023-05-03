@@ -16,7 +16,7 @@ class Game {
       canvas: this.canvas,
     })
     this.levelIndex = 0
-    this.level = getLevels(0, canvas, this.player)
+    this.level = null
   }
 
   main(tFrame) {
@@ -39,7 +39,7 @@ class Game {
   }
 
   render() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.level.render(this.ctx, this.tick)
 
     this.ui.render(this.player)
@@ -50,7 +50,13 @@ class Game {
 
     if (this.level.over) {
       this.levelIndex++
-      const newLevel = getLevels(this.levelIndex, this.canvas, this.player)
+      this.player.laserBolts = []
+      const newLevel = getLevels(
+        this.levelIndex,
+        this.ui,
+        this.canvas,
+        this.player
+      )
       if (newLevel === null) {
         this.over = true
         this.isWon = true
@@ -65,24 +71,24 @@ class Game {
 
     if (this.over) {
       this.ui.message = this.isWon
-        ? '✨ Congratulations! You Win! ✨'
-        : 'Game Over'
-      this.ui.message += '<br/><br/>Press Enter to Start'
+        ? '✨ CONGRATULATIONS! YOU WIN! ✨'
+        : 'GAME OVER'
+      this.ui.message += '<br/><br/>PRESS ENTER TO START'
       this.ui.backgroundColor = '#000'
       this.ui.opacity = 1
     }
   }
 
   init() {
-    this.ui.backgroundColor = 'transparent'
-    this.ui.opacity = 0.8
-    this.ui.message = ''
+    // this.ui.backgroundColor = 'transparent'
+    // this.ui.opacity = 0.8
+    // this.ui.message = ''
     this.over = false
     this.player = new Player({
       canvas: this.canvas,
     })
     this.levelIndex = 0
-    this.level = getLevels(0, this.canvas, this.player)
+    this.level = getLevels(0, this.ui, this.canvas, this.player)
     if (this.stopMain) {
       cancelAnimationFrame(this.stopMain)
     }

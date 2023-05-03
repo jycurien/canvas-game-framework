@@ -3,6 +3,7 @@ import EnemyWave from './EnemyWave'
 
 export default class Level {
   constructor({
+    ui,
     canvas,
     player,
     number,
@@ -10,25 +11,42 @@ export default class Level {
     enemyFormations,
     scoreToNextLevel,
   }) {
+    this.ui = ui
     this.canvas = canvas
     this.player = player
     this.number = number
     this.background = background
     this.enemyFormations = enemyFormations
     this.scoreToNextLevel = this.player.score + scoreToNextLevel
-    this.enemySpawnDelay = 60
+    this.enemySpawnDelay = 180
     this.enemyWaves = []
     this.over = false
     this.spawnBossDelay = null
+    this.startDelay = 120
+    this.ui.backgroundColor = 'black'
+    this.ui.opacity = 0.8
+    this.ui.message = `LEVEL ${this.number}`
   }
 
   render(ctx, tick) {
     this.background.render(ctx, tick)
+    if (this.startDelay > 0) {
+      return
+    }
     this.player.render(ctx, tick)
     this.enemyWaves.forEach((enemyWave) => enemyWave.render(ctx, tick))
   }
 
   update() {
+    if (this.startDelay > 0) {
+      this.startDelay--
+      if (this.startDelay === 0) {
+        this.ui.backgroundColor = 'transparent'
+        this.ui.message = ''
+      }
+      return
+    }
+
     this.player.update()
     this.background.update()
 
@@ -83,6 +101,7 @@ export default class Level {
       }
     } else if (this.spawnBossDelay > 0) {
       this.spawnBossDelay--
+      this.ui.message = 'GET READY...'
     } else {
       this.background.velocity.y = 0
       // TODO SPAWN BOSS
@@ -130,7 +149,7 @@ export default class Level {
             enemyWave.enemies.splice(enemyIndex, 1)
 
             if (this.player.score >= this.scoreToNextLevel) {
-              this.spawnBossDelay = 200
+              this.spawnBossDelay = 240
             }
           }
         }
