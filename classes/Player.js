@@ -1,7 +1,7 @@
 import { shipImage, explosionShipImage } from '../images/images'
+import playAudio from '../utils/audio'
 import LaserBolt from './LaserBolt'
 import SpriteElement from './SpriteElement'
-import playAudio from '../audio/audio'
 
 export default class Player extends SpriteElement {
   constructor({ canvas }) {

@@ -132,6 +132,7 @@ export default class Level {
           this.player.invicibleTimeout === 0 &&
           this.player.deleteTimeout === null &&
           enemy.lifePoints > 0 &&
+          this.player.lifePoints > 0 &&
           detectRectCollision(this.player, enemy)
         ) {
           enemy.lifePoints--
@@ -159,6 +160,7 @@ export default class Level {
           if (
             this.player.invicibleTimeout === 0 &&
             this.player.deleteTimeout === null &&
+            this.player.lifePoints > 0 &&
             detectRectCollision(enemy.laserBolt, this.player)
           ) {
             enemy.laserBolt = null

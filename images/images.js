@@ -1,12 +1,14 @@
 import lifeImageSrc from '../assets/img/life.png'
 import shipImageSrc from '../assets/img/ship-a1.png'
 import explosionShipImageSrc from '../assets/img/explosion-ship.png'
-import enemySmallImageSrc from '../assets/img/enemy-small.png'
-import enemyMediumImageSrc from '../assets/img/enemy-medium.png'
-import enemyBigImageSrc from '../assets/img/enemy-big.png'
-import explosionSmallImageSrc from '../assets/img/explosion-small.png'
-import explosionMediumImageSrc from '../assets/img/explosion-medium.png'
-import explosionBigImageSrc from '../assets/img/explosion-big.png'
+import enemy1ImageSrc from '../assets/img/enemy1.png'
+import enemy2ImageSrc from '../assets/img/enemy2.png'
+import enemy3ImageSrc from '../assets/img/enemy3.png'
+import enemy4ImageSrc from '../assets/img/enemy4.png'
+import explosionEnemy1ImageSrc from '../assets/img/explosion-enemy1.png'
+import explosionEnemy2ImageSrc from '../assets/img/explosion-enemy2.png'
+import explosionEnemy3ImageSrc from '../assets/img/explosion-enemy3.png'
+import explosionEnemy4ImageSrc from '../assets/img/explosion-enemy4.png'
 import boltImageSrc from '../assets/img/laser-bolts.png'
 import desertBackgroundSrc from '../assets/img/desert-background.png'
 import riverBackgroundSrc from '../assets/img/river-background.png'
@@ -20,18 +22,26 @@ const explosionShipImage = new Image()
 explosionShipImage.src = explosionShipImageSrc
 const boltImage = new Image()
 boltImage.src = boltImageSrc
-const enemyBigImage = new Image()
-enemyBigImage.src = enemyBigImageSrc
-const explosionBigImage = new Image()
-explosionBigImage.src = explosionBigImageSrc
-const enemyMediumImage = new Image()
-enemyMediumImage.src = enemyMediumImageSrc
-const explosionMediumImage = new Image()
-explosionMediumImage.src = explosionMediumImageSrc
-const enemySmallImage = new Image()
-enemySmallImage.src = enemySmallImageSrc
-const explosionSmallImage = new Image()
-explosionSmallImage.src = explosionSmallImageSrc
+
+// Enemies
+const enemy1Image = new Image()
+enemy1Image.src = enemy1ImageSrc
+const explosionEnemy1Image = new Image()
+explosionEnemy1Image.src = explosionEnemy1ImageSrc
+const enemy2Image = new Image()
+enemy2Image.src = enemy2ImageSrc
+const explosionEnemy2Image = new Image()
+explosionEnemy2Image.src = explosionEnemy2ImageSrc
+const enemy3Image = new Image()
+enemy3Image.src = enemy3ImageSrc
+const explosionEnemy3Image = new Image()
+explosionEnemy3Image.src = explosionEnemy3ImageSrc
+const enemy4Image = new Image()
+enemy4Image.src = enemy4ImageSrc
+const explosionEnemy4Image = new Image()
+explosionEnemy4Image.src = explosionEnemy4ImageSrc
+
+// BG
 const desertBackgroundImage = new Image()
 desertBackgroundImage.src = desertBackgroundSrc
 const riverBackgroundImage = new Image()
@@ -44,12 +54,14 @@ export {
   shipImage,
   explosionShipImage,
   boltImage,
-  enemyBigImage,
-  explosionBigImage,
-  enemyMediumImage,
-  explosionMediumImage,
-  enemySmallImage,
-  explosionSmallImage,
+  enemy1Image,
+  explosionEnemy1Image,
+  enemy2Image,
+  explosionEnemy2Image,
+  enemy3Image,
+  explosionEnemy3Image,
+  enemy4Image,
+  explosionEnemy4Image,
   desertBackgroundImage,
   riverBackgroundImage,
   spaceBackgroundImage,

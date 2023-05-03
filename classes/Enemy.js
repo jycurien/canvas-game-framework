@@ -1,61 +1,28 @@
-import {
-  enemyBigImage,
-  explosionBigImage,
-  enemyMediumImage,
-  explosionMediumImage,
-  enemySmallImage,
-  explosionSmallImage,
-} from '../images/images'
-import playAudio from '../audio/audio'
+import playAudio from '../utils/audio'
 import EnemyBolt from './EnemyBolt'
 import SpriteElement from './SpriteElement'
 
-const enemyPoints = {
-  small: 10,
-  medium: 20,
-  big: 30,
-}
-
 export default class Enemy extends SpriteElement {
-  constructor({ canvas, position, velocity, type = 'small' }) {
-    let width = 32
-    let height = 32
-    let image = enemySmallImage
-    let explosionImage = explosionSmallImage
-    let maxLifePoints = 1
-
-    if (type === 'medium') {
-      width = 64
-      image = enemyMediumImage
-      explosionImage = explosionMediumImage
-      maxLifePoints = 2
-    } else if (type === 'big') {
-      width = 50
-      height = 58
-      image = enemyBigImage
-      explosionImage = explosionBigImage
-      maxLifePoints = 4
-    }
-
+  constructor({ canvas, position, velocity, data }) {
     super({
       canvas,
       position,
       velocity,
-      image,
+      image: data.image,
       nbFrames: 2,
       tickDivider: 4,
-      frameWidth: width,
-      frameHeight: height,
+      frameWidth: data.width,
+      frameHeight: data.height,
       scale: 1,
     })
 
-    this.type = type
-    this.maxLifePoints = maxLifePoints
-    this.lifePoints = maxLifePoints
-    this.explosionImage = explosionImage
+    this.type = data.type
+    this.maxLifePoints = data.maxLifePoints
+    this.lifePoints = this.maxLifePoints
+    this.explosionImage = data.explosionImage
     this.laserBolt = null
     this.opacity = 1
-    this.points = enemyPoints[type]
+    this.points = data.scorePoints
     this.hit = false
     this.explosionSoundSrc = '../assets/audio/explosion.wav'
   }
@@ -67,7 +34,7 @@ export default class Enemy extends SpriteElement {
         x: 0,
         y: 0,
       }
-      if (this.type === 'big') {
+      if (this.type === 3) {
         offset = {
           x: 0,
           y: 10,
