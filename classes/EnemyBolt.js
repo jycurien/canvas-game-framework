@@ -8,7 +8,7 @@ export default class EnemyBolt extends SpriteElement {
 
     const velocity = {
       x: 0,
-      y: 4,
+      y: 5,
     }
 
     const origin = {

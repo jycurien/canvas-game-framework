@@ -113,6 +113,7 @@ const levels = [
         [null, 4, null],
         [4, null, 4],
       ],
+      [[5, 6, 6, 5]],
     ],
     scoreToNextLevel: 200,
   },

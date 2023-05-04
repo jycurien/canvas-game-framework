@@ -7,6 +7,10 @@ import {
   explosionEnemy3Image,
   enemy4Image,
   explosionEnemy4Image,
+  enemy5Image,
+  explosionEnemy5Image,
+  enemy6Image,
+  explosionEnemy6Image,
 } from '../images/images'
 import Element from './Element'
 import Enemy from './Enemy'
@@ -51,6 +55,26 @@ const enemyData = {
     width: 40,
     height: 42,
     colGap: 23,
+  },
+  5: {
+    type: 5,
+    image: enemy5Image,
+    explosionImage: explosionEnemy5Image,
+    scorePoints: 50,
+    maxLifePoints: 3,
+    width: 48,
+    height: 38,
+    colGap: 13,
+  },
+  6: {
+    type: 6,
+    image: enemy6Image,
+    explosionImage: explosionEnemy6Image,
+    scorePoints: 60,
+    maxLifePoints: 4,
+    width: 48,
+    height: 38,
+    colGap: 13,
   },
 }
 
@@ -159,7 +183,7 @@ export default class EnemyWave extends Element {
     } else if (this.enemies.length > 0) {
       const randEnemyIndex = Math.floor(Math.random() * this.enemies.length)
       this.enemies[randEnemyIndex].shoot()
-      this.enemyBoltDelay = Math.floor(Math.random() * 50) + 30
+      this.enemyBoltDelay = Math.floor(Math.random() * 30)
     }
   }
 }

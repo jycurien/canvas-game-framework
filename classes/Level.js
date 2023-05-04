@@ -85,7 +85,7 @@ export default class Level {
             },
             velocity: {
               x: Math.random() - 0.5 > 0 ? 3 : -3,
-              y: Math.random() * 2 + 2,
+              y: Math.random() * 1.5 + 2,
             },
             formation,
             horizontalBoundaries: {
