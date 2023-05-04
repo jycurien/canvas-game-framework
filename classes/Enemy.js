@@ -1,3 +1,4 @@
+import { drawShadow } from '../utils/drawingFunctions'
 import playAudio from '../utils/audio'
 import EnemyBolt from './EnemyBolt'
 import SpriteElement from './SpriteElement'
@@ -40,7 +41,8 @@ export default class Enemy extends SpriteElement {
           y: 10,
         }
       }
-      ctx.drawShadow({
+      drawShadow({
+        ctx,
         element: this,
         offset,
         spread: {

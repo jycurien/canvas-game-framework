@@ -1,3 +1,4 @@
+import { rotateDrawing, drawShadow } from '../utils/drawingFunctions'
 import { shipImage, explosionShipImage } from '../images/images'
 import playAudio from '../utils/audio'
 import LaserBolt from './LaserBolt'
@@ -107,7 +108,8 @@ export default class Player extends SpriteElement {
 
   render(ctx, tick) {
     this.nbFrames = this.invicibleTimeout > 0 ? 6 : 3
-    ctx.rotateDrawing(
+    rotateDrawing(
+      ctx,
       {
         x: this.position.x + this.width / 2,
         y: this.position.y + this.height / 2,
@@ -115,7 +117,8 @@ export default class Player extends SpriteElement {
       this.rotation,
       () => {
         if (tick % 3 === 0 && this.deleteTimeout === null) {
-          ctx.drawShadow({
+          drawShadow({
+            ctx,
             element: this,
             offset: {
               x: 0,

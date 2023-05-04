@@ -1,3 +1,4 @@
+import { drawRect } from '../utils/drawingFunctions'
 import Element from './Element'
 
 export default class RectangularElement extends Element {
@@ -20,7 +21,8 @@ export default class RectangularElement extends Element {
   }
 
   render(ctx, tick) {
-    ctx.drawRect(
+    drawRect(
+      ctx,
       this.position.x,
       this.position.y,
       this.width,

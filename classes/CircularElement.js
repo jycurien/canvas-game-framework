@@ -1,3 +1,4 @@
+import { drawCircle } from '../utils/drawingFunctions'
 import Element from './Element'
 
 export default class CircularElement extends Element {
@@ -18,7 +19,8 @@ export default class CircularElement extends Element {
   }
 
   render(ctx, tick) {
-    ctx.drawCircle(
+    drawCircle(
+      ctx,
       this.position.x,
       this.position.y,
       this.radius,
