@@ -1,5 +1,4 @@
 import { drawShadow } from '../utils/drawingFunctions'
-import playAudio from '../utils/audio'
 import EnemyBolt from './EnemyBolt'
 import SpriteElement from './SpriteElement'
 
@@ -25,7 +24,8 @@ export default class Enemy extends SpriteElement {
     this.opacity = 1
     this.points = data.scorePoints
     this.hit = false
-    this.explosionSoundSrc = '../assets/audio/explosion.wav'
+    this.explosionSound = new Audio('../assets/audio/explosion.wav')
+    this.explosionSound.volume = 0.01
   }
 
   render(ctx, tick) {
@@ -69,7 +69,8 @@ export default class Enemy extends SpriteElement {
       this.image = this.explosionImage
       this.nbFrames = 5
       this.deleteTimeout = 20
-      playAudio({ src: this.explosionSoundSrc, volume: 0.01, loop: false })
+      this.explosionSound.currentTime = 0
+      this.explosionSound.play()
     }
 
     if (this.laserBolt !== null) {

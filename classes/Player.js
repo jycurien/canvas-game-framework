@@ -1,6 +1,5 @@
 import { rotateDrawing, drawShadow } from '../utils/drawingFunctions'
 import { shipImage, explosionShipImage } from '../images/images'
-import playAudio from '../utils/audio'
 import LaserBolt from './LaserBolt'
 import SpriteElement from './SpriteElement'
 
@@ -40,8 +39,10 @@ export default class Player extends SpriteElement {
     this.spacePressed = false
     this.laserBolts = []
     this.explosionImage = explosionShipImage
-    this.shootSoundSrc = '../assets/audio/laser-shoot.wav'
-    this.explosionSoundSrc = '../assets/audio/explosion.wav'
+    this.shootSound = new Audio('../assets/audio/laser-shoot.wav')
+    this.shootSound.volume = 0.01
+    this.explosionSound = new Audio('../assets/audio/explosion.wav')
+    this.explosionSound.volume = 0.01
     this.boltBaseDelay = 10
     this.newBoltTimeout = 0
     this.score = 0
@@ -155,7 +156,8 @@ export default class Player extends SpriteElement {
       this.nbFrames = 5
       this.tickDivider = 2
       this.deleteTimeout = 20
-      playAudio({ src: this.explosionSoundSrc, volume: 0.01, loop: false })
+      this.explosionSound.currentTime = 0
+      this.explosionSound.play()
     }
 
     if (this.deleteTimeout === null) {
@@ -229,7 +231,8 @@ export default class Player extends SpriteElement {
           },
         })
       )
-      playAudio({ src: this.shootSoundSrc, volume: 0.01, loop: false })
+      this.shootSound.currentTime = 0
+      this.shootSound.play()
       this.newBoltTimeout = this.boltBaseDelay
     }
   }
