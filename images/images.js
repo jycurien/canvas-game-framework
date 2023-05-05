@@ -1,4 +1,5 @@
 import lifeImageSrc from '../assets/img/life.png'
+import bombIconImageSrc from '../assets/img/bomb-icon.png'
 import shipImageSrc from '../assets/img/ship-a1.png'
 import explosionShipImageSrc from '../assets/img/explosion-ship.png'
 import enemy1ImageSrc from '../assets/img/enemy1.png'
@@ -23,6 +24,8 @@ import spaceBackgroundSrc from '../assets/img/space-background.png'
 
 const lifeImage = new Image()
 lifeImage.src = lifeImageSrc
+const bombIconImage = new Image()
+bombIconImage.src = bombIconImageSrc
 const shipImage = new Image()
 shipImage.src = shipImageSrc
 const explosionShipImage = new Image()
@@ -72,6 +75,7 @@ spaceBackgroundImage.src = spaceBackgroundSrc
 
 export {
   lifeImage,
+  bombIconImage,
   shipImage,
   explosionShipImage,
   boltImage,

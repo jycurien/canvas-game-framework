@@ -93,10 +93,6 @@ body {
   }
 }
 
-#bottomBar {
-  font-size: 0.875rem;
-}
-
 canvas {
   display: block;
   z-index: 1;

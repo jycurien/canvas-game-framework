@@ -3,6 +3,7 @@ import { shipImage, explosionShipImage } from '../images/images'
 import LaserBolt from './LaserBolt'
 import SpriteElement from './SpriteElement'
 import { Shield } from './Shield'
+import { Bomb } from './Bomb'
 
 export default class Player extends SpriteElement {
   constructor({ canvas }) {
@@ -55,6 +56,8 @@ export default class Player extends SpriteElement {
       canvas: this.canvas,
       parentElement: this,
     })
+    this.bombsNumber = 3
+    this.bomb = null
 
     document.addEventListener('keydown', this.keyDownHandler.bind(this), false)
     document.addEventListener('keyup', this.keyUpHandler.bind(this), false)
@@ -81,6 +84,9 @@ export default class Player extends SpriteElement {
       case ' ':
         this.spacePressed = true
         break
+      case 'Control':
+        this.controlPressed = true
+        break
       default:
         break
     }
@@ -106,6 +112,9 @@ export default class Player extends SpriteElement {
         break
       case ' ':
         this.spacePressed = false
+        break
+      case 'Control':
+        this.controlPressed = false
         break
       default:
         break
@@ -146,6 +155,10 @@ export default class Player extends SpriteElement {
 
     if (this.laserBolts.length > 0) {
       this.laserBolts.forEach((laserBolt) => laserBolt.render(ctx, tick))
+    }
+
+    if (this.bomb !== null) {
+      this.bomb.render(ctx, tick)
     }
   }
 
@@ -212,6 +225,8 @@ export default class Player extends SpriteElement {
 
     this.spacePressed && this.shoot()
 
+    this.controlPressed && this.shootBomb()
+
     if (this.newBoltTimeout > 0) {
       this.newBoltTimeout--
     }
@@ -233,6 +248,13 @@ export default class Player extends SpriteElement {
         this.shield = null
       }
     }
+
+    if (this.bomb !== null) {
+      this.bomb.update()
+      if (this.bomb.radius >= 250) {
+        this.bomb = null
+      }
+    }
   }
 
   shoot() {
@@ -249,6 +271,16 @@ export default class Player extends SpriteElement {
       this.shootSound.currentTime = 0
       this.shootSound.play()
       this.newBoltTimeout = this.boltBaseDelay
+    }
+  }
+
+  shootBomb() {
+    if (this.bombsNumber > 0 && this.bomb === null) {
+      this.bomb = new Bomb({
+        canvas: this.canvas,
+        parentElement: this,
+      })
+      this.bombsNumber--
     }
   }
 

@@ -11,7 +11,7 @@ export class Shield extends CircularElement {
       radius: Math.max(parentElement.width / 2, parentElement.height / 2) + 10,
       fillStyle: 'hsla(240, 100%, 75%, 0.3)',
       lineWidth: '1',
-      strokeStyle: 'hsla(240, 100%, 75%, 0.6)',
+      strokeStyle: 'hsla(240, 100%, 75%, 0.5)',
     })
     this.parentElement = parentElement
     this.lifePoints = 3

@@ -1,4 +1,8 @@
-import { lifeImage } from '../images/images'
+import { lifeImage, bombIconImage } from '../images/images'
+
+bombIconImage.width = 12
+bombIconImage.style.marginRight = '2px'
+lifeImage.style.marginRight = '2px'
 
 export default class Ui {
   constructor() {
@@ -14,6 +18,8 @@ export default class Ui {
     this.backgroundColor = 'transparent'
     this.opacity = 0.8
     this.playerLivesCache = null
+    this.playerShieldCache = null
+    this.playerBombsNumberCache = null
   }
 
   render(player) {
@@ -29,11 +35,22 @@ export default class Ui {
     this.topCenterContainer.textContent = `Score: ${player.score
       .toString()
       .padStart(5, '0')}`
-    if (player.shield !== null) {
+    if (
+      player.shield !== null &&
+      this.playerShieldCache !== player.shield?.lifePoints
+    ) {
+      this.playerShieldCache = player.shield?.lifePoints
       this.topLeftContainer.innerHTML = `<div style="width: ${
         ((player.shield?.lifePoints ?? 0) * 100) / 3
       }%; height:8px; background-color:hsla(240, 100%, 75%, 0.5)"></div>`
     }
     this.messageContainer.innerHTML = this.message
+    if (this.playerBombsNumberCache !== player.bombsNumber) {
+      this.playerBombsNumberCache = player.bombsNumber
+      this.bottomLeftContainer.innerHTML = ''
+      for (let i = 0; i < player.bombsNumber; i++) {
+        this.bottomLeftContainer.appendChild(bombIconImage.cloneNode())
+      }
+    }
   }
 }
