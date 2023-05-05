@@ -131,6 +131,20 @@ export default class Level {
 
     if (this.boss !== null) {
       this.boss.update()
+      // Player bomb hits boss
+      if (
+        this.player.bomb !== null &&
+        this.boss.lifePoints > 0 &&
+        detectRectCollision(this.player.bomb, this.boss)
+      ) {
+        this.boss.lifePoints--
+        if (this.boss.lifePoints === 0) {
+          this.player.score += this.boss.points
+        } else {
+          this.boss.hit = true
+        }
+      }
+
       // Player laser hits boss
       if (this.player.laserBolts.length > 0 && this.boss.lifePoints > 0) {
         this.player.laserBolts.forEach((laserBolt, laserBoltIndex) => {
@@ -204,6 +218,20 @@ export default class Level {
       enemyWave.update()
 
       enemyWave.enemies.forEach((enemy, enemyIndex) => {
+        // Player bomb hits enemy
+        if (
+          this.player.bomb !== null &&
+          enemy.lifePoints > 0 &&
+          detectRectCollision(this.player.bomb, enemy)
+        ) {
+          enemy.lifePoints--
+          if (enemy.lifePoints === 0) {
+            this.player.score += enemy.points
+          } else {
+            enemy.hit = true
+          }
+        }
+
         // Player laser hits enemy
         if (this.player.laserBolts.length > 0 && enemy.lifePoints > 0) {
           this.player.laserBolts.forEach((laserBolt, laserBoltIndex) => {

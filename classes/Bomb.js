@@ -42,7 +42,7 @@ export class Bomb extends CircularElement {
       this.explodeDelay--
     } else {
       this.velocity.y = 0
-      this.radius += 2
+      this.radius += 4
     }
     super.update()
   }

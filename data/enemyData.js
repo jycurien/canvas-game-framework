@@ -147,7 +147,7 @@ const enemyData = {
     explosionImage: explosionBoss1Image,
     megaBoltImage: megaBoltBoss1Image,
     scorePoints: 1000,
-    maxLifePoints: 100,
+    maxLifePoints: 400,
     nbFrames: 3,
     width: 134,
     height: 138,
