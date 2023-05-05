@@ -107,7 +107,7 @@ export default class EnemyWave extends Element {
     } else if (this.enemies.length > 0) {
       const randEnemyIndex = Math.floor(Math.random() * this.enemies.length)
       this.enemies[randEnemyIndex].shoot()
-      this.enemyBoltDelay = Math.floor(Math.random() * 30)
+      this.enemyBoltDelay = Math.floor(Math.random() * 20)
     }
   }
 }

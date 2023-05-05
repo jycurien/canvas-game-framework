@@ -21,7 +21,8 @@ export default class Enemy extends SpriteElement {
     this.maxLifePoints = data.maxLifePoints
     this.lifePoints = this.maxLifePoints
     this.explosionImage = data.explosionImage
-    this.laserBolt = null
+    this.boltWave = []
+    this.maxBoltWaveLength = data.maxBoltWaveLength ?? 1
     this.opacity = 1
     this.points = data.scorePoints
     this.hit = false
@@ -59,7 +60,9 @@ export default class Enemy extends SpriteElement {
       })
     }
 
-    this.laserBolt && this.laserBolt.render(ctx, tick)
+    if (this.boltWave.length > 0) {
+      this.boltWave.forEach((bolt) => bolt.render(ctx, tick))
+    }
 
     if (this.hit) {
       this.hit = false
@@ -88,23 +91,30 @@ export default class Enemy extends SpriteElement {
       this.explosionSound.play()
     }
 
-    if (this.laserBolt !== null) {
-      this.laserBolt.update()
-      if (this.laserBolt.getTop() > this.canvas.height) {
-        this.laserBolt = null
-      }
+    if (this.boltWave.length > 0) {
+      this.boltWave.forEach((bolt, index) => {
+        bolt.update()
+        if (bolt.getTop() > this.canvas.height) {
+          this.boltWave.splice(index, 1)
+        }
+      })
     }
   }
 
   shoot() {
-    if (this.laserBolt === null) {
-      this.laserBolt = new EnemyBolt({
-        canvas: this.canvas,
-        position: {
-          x: this.position.x + this.width / 2,
-          y: this.position.y + this.height,
-        },
-      })
+    if (
+      this.boltWave.length < this.maxBoltWaveLength &&
+      this.deleteTimeout === null
+    ) {
+      this.boltWave.push(
+        new EnemyBolt({
+          canvas: this.canvas,
+          position: {
+            x: this.position.x + this.width / 2,
+            y: this.position.y + this.height,
+          },
+        })
+      )
     }
   }
 }

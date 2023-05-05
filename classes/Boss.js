@@ -29,12 +29,26 @@ export default class Boss extends Enemy {
 
   update() {
     super.update()
-    if (this.getLeft() < 0 || this.getRight() > this.canvas.width) {
+    if (
+      this.getLeft() < -this.width / 2 ||
+      this.getRight() > this.canvas.width + this.width / 2
+    ) {
       this.velocity.x = -this.velocity.x
     }
-    if (this.getTop() > 10) {
-      this.velocity.y = 0
+    if (
+      this.position.y > this.canvas.height / 2 ||
+      (this.velocity.y < 0 && this.getTop() < 10)
+    ) {
+      this.velocity.y = -this.velocity.y
     }
+
+    if (this.enemyBoltDelay > 0) {
+      this.enemyBoltDelay--
+    } else {
+      this.shoot()
+      this.enemyBoltDelay = Math.floor(Math.random() * 20)
+    }
+
     if (this.deleteTimeout !== null && this.deleteTimeout < 100) {
       this.explosionSound.volume -= 0.0001
       if (this.deleteTimeout === 0) {

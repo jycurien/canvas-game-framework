@@ -26,6 +26,7 @@ const enemyData = {
     width: 32,
     height: 32,
     colGap: 10,
+    maxBoltWaveLength: 1,
   },
   2: {
     type: 2,
@@ -37,6 +38,7 @@ const enemyData = {
     width: 64,
     height: 32,
     colGap: 20,
+    maxBoltWaveLength: 1,
   },
   3: {
     type: 3,
@@ -48,6 +50,7 @@ const enemyData = {
     width: 50,
     height: 58,
     colGap: 13,
+    maxBoltWaveLength: 2,
   },
   4: {
     type: 4,
@@ -59,6 +62,7 @@ const enemyData = {
     width: 40,
     height: 42,
     colGap: 23,
+    maxBoltWaveLength: 2,
   },
   5: {
     type: 5,
@@ -70,6 +74,7 @@ const enemyData = {
     width: 48,
     height: 38,
     colGap: 13,
+    maxBoltWaveLength: 3,
   },
   6: {
     type: 6,
@@ -81,6 +86,7 @@ const enemyData = {
     width: 48,
     height: 38,
     colGap: 13,
+    maxBoltWaveLength: 3,
   },
   boss1: {
     type: 'boss1',
@@ -93,6 +99,7 @@ const enemyData = {
     height: 138,
     colGap: 0,
     scale: 2,
+    maxBoltWaveLength: 5,
   },
 }
 
