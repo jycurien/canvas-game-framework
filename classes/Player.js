@@ -2,6 +2,7 @@ import { rotateDrawing, drawShadow } from '../utils/drawingFunctions'
 import { shipImage, explosionShipImage } from '../images/images'
 import LaserBolt from './LaserBolt'
 import SpriteElement from './SpriteElement'
+import { Shield } from './Shield'
 
 export default class Player extends SpriteElement {
   constructor({ canvas }) {
@@ -50,6 +51,10 @@ export default class Player extends SpriteElement {
     this.maxLifePoints = 1
     this.lifePoints = this.maxLifePoints
     this.invicibleTimeout = 0
+    this.shield = new Shield({
+      canvas: this.canvas,
+      parentElement: this,
+    })
 
     document.addEventListener('keydown', this.keyDownHandler.bind(this), false)
     document.addEventListener('keyup', this.keyUpHandler.bind(this), false)
@@ -133,6 +138,9 @@ export default class Player extends SpriteElement {
           })
         }
         super.render(ctx, tick)
+        if (this.shield !== null) {
+          this.shield.render(ctx, tick)
+        }
       }
     )
 
@@ -218,6 +226,13 @@ export default class Player extends SpriteElement {
         this.laserBolts.splice(index, 1)
       }
     })
+
+    if (this.shield !== null) {
+      this.shield.update()
+      if (this.shield.lifePoints === 0) {
+        this.shield = null
+      }
+    }
   }
 
   shoot() {
@@ -252,5 +267,10 @@ export default class Player extends SpriteElement {
     this.velocity.y = 0
     this.deleteTimeout = null
     this.invicibleTimeout = 120
+    this.shield = new Shield({
+      canvas: this.canvas,
+      parentElement: this,
+    })
+    this.shield.lifePoints = 3
   }
 }

@@ -38,7 +38,7 @@ const levels = [
       ],
       [[3, 3, 3, 3, 3]],
     ],
-    scoreToNextLevel: 100,
+    scoreToNextLevel: 1000,
     bossType: 'boss1',
   },
   {
@@ -79,7 +79,7 @@ const levels = [
         [3, null, 3],
       ],
     ],
-    scoreToNextLevel: 200,
+    scoreToNextLevel: 2000,
     bossType: 'boss1',
   },
   {

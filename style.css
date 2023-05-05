@@ -55,7 +55,8 @@ body {
   background-color: #000;
 }
 
-#topBar {
+#topBar,
+#bottomBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -63,16 +64,20 @@ body {
 }
 
 #topLeft,
-#topRight {
+#topRight,
+#bottomLeft,
+#bottomRight {
   width: 25%;
 }
 
-#topCenter {
+#topCenter,
+#bottomCenter {
   width: 50%;
   text-align: center;
 }
 
-#topRight {
+#topRight,
+#bottomRight {
   text-align: right;
 }
 

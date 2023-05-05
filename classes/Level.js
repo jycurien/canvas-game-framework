@@ -148,6 +148,20 @@ export default class Level {
 
       // Player collides with boss
       if (
+        this.player.shield !== null &&
+        this.player.shield.lifePoints > 0 &&
+        this.player.invicibleTimeout === 0 &&
+        this.boss.lifePoints > 0 &&
+        detectRectCollision(this.player.shield, this.boss)
+      ) {
+        this.boss.lifePoints--
+        if (this.boss.lifePoints === 0) {
+          this.player.score += this.boss.points
+        }
+        this.player.shield.lifePoints--
+      }
+
+      if (
         this.player.invicibleTimeout === 0 &&
         this.player.deleteTimeout === null &&
         this.boss.lifePoints > 0 &&
@@ -162,8 +176,17 @@ export default class Level {
       }
 
       // Boss bolt hits player
-      if (this.boss.boltWave.length > 0) {
+      if (this.player.invicibleTimeout === 0 && this.boss.boltWave.length > 0) {
         this.boss.boltWave.forEach((bolt, boltIndex) => {
+          if (
+            this.player.shield !== null &&
+            this.player.shield.lifePoints > 0 &&
+            detectRectCollision(bolt, this.player.shield)
+          ) {
+            this.player.shield.lifePoints--
+            this.boss.boltWave.splice(boltIndex, 1)
+          }
+
           if (detectRectCollision(bolt, this.player)) {
             this.player.lifePoints--
             this.boss.boltWave.splice(boltIndex, 1)
@@ -198,6 +221,21 @@ export default class Level {
 
         // Player collides with enemy
         if (
+          this.player.shield !== null &&
+          this.player.shield.lifePoints > 0 &&
+          this.player.invicibleTimeout === 0 &&
+          enemy.lifePoints > 0 &&
+          detectRectCollision(this.player.shield, enemy)
+        ) {
+          enemy.lifePoints--
+          if (enemy.lifePoints === 0) {
+            this.player.score += enemy.points
+          }
+          enemy.boltWave = []
+          this.player.shield.lifePoints--
+        }
+
+        if (
           this.player.invicibleTimeout === 0 &&
           this.player.deleteTimeout === null &&
           enemy.lifePoints > 0 &&
@@ -231,6 +269,15 @@ export default class Level {
           this.player.lifePoints > 0
         ) {
           enemy.boltWave.forEach((bolt, boltIndex) => {
+            if (
+              this.player.shield !== null &&
+              this.player.shield.lifePoints > 0 &&
+              detectRectCollision(bolt, this.player.shield)
+            ) {
+              this.player.shield.lifePoints--
+              enemy.boltWave.splice(boltIndex, 1)
+            }
+
             if (detectRectCollision(bolt, this.player)) {
               this.player.lifePoints--
               enemy.boltWave.splice(boltIndex, 1)
