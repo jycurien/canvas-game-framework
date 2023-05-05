@@ -39,6 +39,7 @@ const levels = [
       [[3, 3, 3, 3, 3]],
     ],
     scoreToNextLevel: 1000,
+    bossType: 'boss1',
   },
   {
     number: 2,
@@ -79,6 +80,7 @@ const levels = [
       ],
     ],
     scoreToNextLevel: 2000,
+    bossType: 'boss1',
   },
   {
     number: 3,
@@ -113,9 +115,18 @@ const levels = [
         [null, 4, null],
         [4, null, 4],
       ],
-      [[5, 6, 6, 5]],
+      [
+        [null, 5, 5, null],
+        [5, 5, 5, 5],
+        [null, 5, 5, null],
+      ],
+      [
+        [6, 6, 6],
+        [6, 6, 6],
+      ],
     ],
-    scoreToNextLevel: 200,
+    scoreToNextLevel: 3000,
+    bossType: 'boss1',
   },
 ]
 
@@ -124,7 +135,7 @@ const getLevels = (index, ui, canvas, player) => {
     return null
   }
 
-  const { number, background, enemyFormations, scoreToNextLevel } =
+  const { number, background, enemyFormations, scoreToNextLevel, bossType } =
     levels[index]
 
   return new Level({
@@ -142,6 +153,7 @@ const getLevels = (index, ui, canvas, player) => {
     }),
     enemyFormations,
     scoreToNextLevel,
+    bossType,
   })
 }
 

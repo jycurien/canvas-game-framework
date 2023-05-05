@@ -1,4 +1,6 @@
+import enemyData from '../data/enemyData'
 import { detectRectCollision } from '../utils/collisionDetection'
+import Boss from './Boss'
 import EnemyWave from './EnemyWave'
 
 export default class Level {
@@ -10,6 +12,7 @@ export default class Level {
     background,
     enemyFormations,
     scoreToNextLevel,
+    bossType,
   }) {
     this.ui = ui
     this.canvas = canvas
@@ -18,10 +21,12 @@ export default class Level {
     this.background = background
     this.enemyFormations = enemyFormations
     this.scoreToNextLevel = this.player.score + scoreToNextLevel
+    this.bossType = bossType
     this.enemySpawnDelay = 180
     this.enemyWaves = []
     this.over = false
     this.spawnBossDelay = null
+    this.boss = null
     this.startDelay = 120
     this.ui.backgroundColor = 'black'
     this.ui.opacity = 0.8
@@ -34,6 +39,9 @@ export default class Level {
       return
     }
     this.player.render(ctx, tick)
+    if (this.boss !== null) {
+      this.boss.render(ctx, tick)
+    }
     this.enemyWaves.forEach((enemyWave) => enemyWave.render(ctx, tick))
   }
 
@@ -102,10 +110,44 @@ export default class Level {
     } else if (this.spawnBossDelay > 0) {
       this.spawnBossDelay--
       this.ui.message = 'GET READY...'
-    } else {
+    } else if (this.boss === null) {
+      this.ui.message = ''
       this.background.velocity.y = 0
-      // TODO SPAWN BOSS
-      this.over = true
+      // SPAWN BOSS
+      const bossData = enemyData[this.bossType]
+      this.boss = new Boss({
+        canvas: this.canvas,
+        position: {
+          x: 0,
+          y: -200,
+        },
+        velocity: {
+          x: Math.random() - 0.5 > 0 ? 1 : -1,
+          y: 1,
+        },
+        data: bossData,
+      })
+    }
+
+    if (this.boss !== null) {
+      this.boss.update()
+      if (this.player.laserBolts.length > 0 && this.boss.lifePoints > 0) {
+        this.player.laserBolts.forEach((laserBolt, laserBoltIndex) => {
+          if (detectRectCollision(laserBolt, this.boss)) {
+            this.player.laserBolts.splice(laserBoltIndex, 1)
+            this.boss.lifePoints--
+            if (this.boss.lifePoints === 0) {
+              this.player.score += this.boss.points
+            } else {
+              this.boss.hit = true
+            }
+          }
+        })
+      }
+      if (this.boss.deleteTimeout === 0) {
+        this.boss = null
+        this.over = true
+      }
     }
 
     this.enemyWaves.forEach((enemyWave, enemyWaveIndex) => {

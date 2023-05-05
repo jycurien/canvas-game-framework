@@ -1,5 +1,5 @@
 import Player from './Player'
-import getLevels from '../levels/getLevels'
+import getLevels from '../data/getLevels'
 import Ui from './Ui'
 
 class Game {
@@ -80,9 +80,6 @@ class Game {
   }
 
   init() {
-    // this.ui.backgroundColor = 'transparent'
-    // this.ui.opacity = 0.8
-    // this.ui.message = ''
     this.over = false
     this.player = new Player({
       canvas: this.canvas,

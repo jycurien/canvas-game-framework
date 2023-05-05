@@ -9,11 +9,11 @@ export default class Enemy extends SpriteElement {
       position,
       velocity,
       image: data.image,
-      nbFrames: 2,
+      nbFrames: data.nbFrames,
       tickDivider: 4,
       frameWidth: data.width,
       frameHeight: data.height,
-      scale: 1,
+      scale: data.scale ?? 1,
     })
 
     this.type = data.type
