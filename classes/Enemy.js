@@ -1,4 +1,5 @@
 import { drawShadow } from '../utils/drawingFunctions'
+import Boss from './Boss'
 import EnemyBolt from './EnemyBolt'
 import SpriteElement from './SpriteElement'
 
@@ -40,6 +41,11 @@ export default class Enemy extends SpriteElement {
           x: 0,
           y: 10,
         }
+      } else if (this.type === 'boss1') {
+        offset = {
+          x: 0,
+          y: -10,
+        }
       }
       drawShadow({
         ctx,
@@ -66,9 +72,18 @@ export default class Enemy extends SpriteElement {
     super.update()
 
     if (this.lifePoints === 0 && this.deleteTimeout === null) {
-      this.image = this.explosionImage
-      this.nbFrames = 5
-      this.deleteTimeout = 20
+      if (this instanceof Boss) {
+        this.velocity = {
+          x: 0,
+          y: 0,
+        }
+        this.deleteTimeout = 300
+        this.explosionSound.loop = true
+      } else {
+        this.image = this.explosionImage
+        this.nbFrames = 5
+        this.deleteTimeout = 20
+      }
       this.explosionSound.currentTime = 0
       this.explosionSound.play()
     }

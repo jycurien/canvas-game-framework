@@ -12,6 +12,7 @@ import {
   enemy6Image,
   explosionEnemy6Image,
   boss1Image,
+  explosionBoss1Image,
 } from '../images/images'
 
 const enemyData = {
@@ -84,9 +85,9 @@ const enemyData = {
   boss1: {
     type: 'boss1',
     image: boss1Image,
-    explosionImage: explosionEnemy6Image, // TODO handle explosions
+    explosionImage: explosionBoss1Image,
     scorePoints: 1000,
-    maxLifePoints: 10,
+    maxLifePoints: 100,
     nbFrames: 3,
     width: 134,
     height: 138,
