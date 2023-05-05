@@ -28,6 +28,12 @@ const enemyData = {
     height: 32,
     colGap: 10,
     maxBoltWaveLength: 1,
+    boltData: [
+      {
+        positionX: 50,
+        velocityX: 0,
+      },
+    ],
   },
   2: {
     type: 2,
@@ -39,7 +45,17 @@ const enemyData = {
     width: 64,
     height: 32,
     colGap: 20,
-    maxBoltWaveLength: 1,
+    maxBoltWaveLength: 2,
+    boltData: [
+      {
+        positionX: 25,
+        velocityX: 0,
+      },
+      {
+        positionX: 75,
+        velocityX: 0,
+      },
+    ],
   },
   3: {
     type: 3,
@@ -52,6 +68,16 @@ const enemyData = {
     height: 58,
     colGap: 13,
     maxBoltWaveLength: 2,
+    boltData: [
+      {
+        positionX: 20,
+        velocityX: 0,
+      },
+      {
+        positionX: 80,
+        velocityX: 0,
+      },
+    ],
   },
   4: {
     type: 4,
@@ -63,7 +89,13 @@ const enemyData = {
     width: 40,
     height: 42,
     colGap: 23,
-    maxBoltWaveLength: 2,
+    maxBoltWaveLength: 3,
+    boltData: [
+      {
+        positionX: 50,
+        velocityX: 0,
+      },
+    ],
   },
   5: {
     type: 5,
@@ -75,7 +107,17 @@ const enemyData = {
     width: 48,
     height: 38,
     colGap: 13,
-    maxBoltWaveLength: 3,
+    maxBoltWaveLength: 4,
+    boltData: [
+      {
+        positionX: 20,
+        velocityX: 0,
+      },
+      {
+        positionX: 80,
+        velocityX: 0,
+      },
+    ],
   },
   6: {
     type: 6,
@@ -87,7 +129,17 @@ const enemyData = {
     width: 48,
     height: 38,
     colGap: 13,
-    maxBoltWaveLength: 3,
+    maxBoltWaveLength: 4,
+    boltData: [
+      {
+        positionX: 20,
+        velocityX: 0,
+      },
+      {
+        positionX: 80,
+        velocityX: 0,
+      },
+    ],
   },
   boss1: {
     type: 'boss1',
@@ -101,7 +153,21 @@ const enemyData = {
     height: 138,
     colGap: 0,
     scale: 2,
-    maxBoltWaveLength: 5,
+    maxBoltWaveLength: 15,
+    boltData: [
+      {
+        positionX: 50,
+        velocityX: -0.5,
+      },
+      {
+        positionX: 50,
+        velocityX: 0,
+      },
+      {
+        positionX: 50,
+        velocityX: 0.5,
+      },
+    ],
   },
 }
 

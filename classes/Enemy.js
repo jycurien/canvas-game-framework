@@ -23,6 +23,7 @@ export default class Enemy extends SpriteElement {
     this.explosionImage = data.explosionImage
     this.boltWave = []
     this.maxBoltWaveLength = data.maxBoltWaveLength ?? 1
+    this.boltData = data.boltData ?? null
     this.opacity = 1
     this.points = data.scorePoints
     this.hit = false
@@ -103,17 +104,24 @@ export default class Enemy extends SpriteElement {
 
   shoot() {
     if (
+      this.boltData !== null &&
       this.boltWave.length < this.maxBoltWaveLength &&
       this.deleteTimeout === null
     ) {
-      this.boltWave.push(
-        new EnemyBolt({
-          canvas: this.canvas,
-          position: {
-            x: this.position.x + this.width / 2,
-            y: this.position.y + this.height,
-          },
-        })
+      this.boltData.forEach((boltData) =>
+        this.boltWave.push(
+          new EnemyBolt({
+            canvas: this.canvas,
+            position: {
+              x: this.position.x + this.width * (boltData.positionX / 100),
+              y: this.position.y + this.height,
+            },
+            velocity: {
+              x: boltData.velocityX,
+              y: 5,
+            },
+          })
+        )
       )
     }
   }

@@ -2,14 +2,9 @@ import { boltImage } from '../images/images'
 import SpriteElement from './SpriteElement'
 
 export default class EnemyBolt extends SpriteElement {
-  constructor({ canvas, position }) {
+  constructor({ canvas, position, velocity }) {
     const scale = 2
     const width = 5
-
-    const velocity = {
-      x: 0,
-      y: 5,
-    }
 
     const origin = {
       x: 6,
