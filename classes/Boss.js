@@ -17,6 +17,8 @@ export default class Boss extends Enemy {
       origin: this.origin,
       offset: this.offset,
     })
+    this.megaBolt = null
+    this.megaBoltDelay = Math.floor(Math.random() * 1000) + 100
   }
 
   render(ctx, tick) {
@@ -44,9 +46,16 @@ export default class Boss extends Enemy {
 
     if (this.enemyBoltDelay > 0) {
       this.enemyBoltDelay--
-    } else {
+    } else if (this.megaBolt === null) {
       this.shoot()
       this.enemyBoltDelay = Math.floor(Math.random() * 20)
+    }
+
+    if (this.megaBoltDelay > 0) {
+      this.megaBoltDelay--
+    } else if (this.boltWave.length === 0) {
+      this.shootMegaBolt()
+      this.megaBoltDelay = Math.floor(Math.random() * 1000) + 100
     }
 
     if (this.deleteTimeout !== null && this.deleteTimeout < 100) {
@@ -55,5 +64,9 @@ export default class Boss extends Enemy {
         this.explosionSound.pause()
       }
     }
+  }
+
+  shootMegaBolt() {
+    console.log('TODO SHOOT MEGA BOLT')
   }
 }

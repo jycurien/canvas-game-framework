@@ -13,6 +13,7 @@ import {
   explosionEnemy6Image,
   boss1Image,
   explosionBoss1Image,
+  megaBoltBoss1Image,
 } from '../images/images'
 
 const enemyData = {
@@ -92,6 +93,7 @@ const enemyData = {
     type: 'boss1',
     image: boss1Image,
     explosionImage: explosionBoss1Image,
+    megaBoltImage: megaBoltBoss1Image,
     scorePoints: 1000,
     maxLifePoints: 100,
     nbFrames: 3,
