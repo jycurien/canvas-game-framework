@@ -13,7 +13,7 @@ import {
   explosionEnemy6Image,
   boss1Image,
   explosionBoss1Image,
-  megaBoltBoss1Image,
+  megaBoltImage,
 } from '../images/images'
 
 const enemyData = {
@@ -145,7 +145,6 @@ const enemyData = {
     type: 'boss1',
     image: boss1Image,
     explosionImage: explosionBoss1Image,
-    megaBoltImage: megaBoltBoss1Image,
     scorePoints: 1000,
     maxLifePoints: 400,
     nbFrames: 3,
@@ -168,31 +167,7 @@ const enemyData = {
         velocityX: 0.5,
       },
     ],
-    subParts: [
-      {
-        type: 'megabolt',
-        relativePosition: {
-          x: 0.5,
-          y: 1.5,
-        },
-        maxLifePoints: 20,
-      },
-      {
-        type: 'megabolt',
-        relativePosition: {
-          x: 0.5,
-          y: 1.5,
-        },
-        maxLifePoints: 20,
-      },
-      {
-        type: 'megabolt',
-        relativePosition: {
-          x: 0.5,
-          y: 1.5,
-        },
-        maxLifePoints: 20,
-      },
+    childElements: [
       {
         type: 'megabolt',
         relativePosition: {

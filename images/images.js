@@ -16,7 +16,7 @@ import explosionEnemy5ImageSrc from '../assets/img/explosion-enemy5.png'
 import explosionEnemy6ImageSrc from '../assets/img/explosion-enemy6.png'
 import boss1ImageSrc from '../assets/img/boss1.png'
 import explosionBoss1ImageSrc from '../assets/img/explosion-boss1.png'
-import megaBoltBoss1ImageSrc from '../assets/img/megabolt-boss1.png'
+import megaBoltImageSrc from '../assets/img/megabolt.png'
 import boltImageSrc from '../assets/img/laser-bolts.png'
 import desertBackgroundSrc from '../assets/img/desert-background.png'
 import riverBackgroundSrc from '../assets/img/river-background.png'
@@ -62,8 +62,8 @@ const boss1Image = new Image()
 boss1Image.src = boss1ImageSrc
 const explosionBoss1Image = new Image()
 explosionBoss1Image.src = explosionBoss1ImageSrc
-const megaBoltBoss1Image = new Image()
-megaBoltBoss1Image.src = megaBoltBoss1ImageSrc
+const megaBoltImage = new Image()
+megaBoltImage.src = megaBoltImageSrc
 
 // BG
 const desertBackgroundImage = new Image()
@@ -91,7 +91,7 @@ export {
   explosionEnemy5Image,
   enemy6Image,
   boss1Image,
-  megaBoltBoss1Image,
+  megaBoltImage,
   explosionBoss1Image,
   explosionEnemy6Image,
   desertBackgroundImage,
