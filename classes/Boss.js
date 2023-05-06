@@ -1,3 +1,4 @@
+import getChildElement from '../childElements/getChildElement'
 import Enemy from './Enemy'
 import SpriteElement from './SpriteElement'
 
@@ -17,10 +18,23 @@ export default class Boss extends Enemy {
       origin: this.origin,
       offset: this.offset,
     })
+    this.childElements = []
+    data.childElements.forEach((elementData) =>
+      this.childElements.push(
+        getChildElement({ elementData, parentElement: this })
+      )
+    )
   }
 
   render(ctx, tick) {
     super.render(ctx, tick)
+
+    if (this.childElements.length > 0) {
+      this.childElements.forEach((el) => {
+        el.render(ctx, tick)
+      })
+    }
+
     if (this.deleteTimeout !== null && this.deleteTimeout > 0) {
       this.explosionSprite.position = this.position
       this.explosionSprite.render(ctx, tick)
@@ -47,6 +61,12 @@ export default class Boss extends Enemy {
     } else {
       this.shoot()
       this.enemyBoltDelay = Math.floor(Math.random() * 20)
+    }
+
+    if (this.childElements.length > 0) {
+      this.childElements.forEach((el) => {
+        el.update()
+      })
     }
 
     if (this.deleteTimeout !== null && this.deleteTimeout < 100) {

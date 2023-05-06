@@ -38,7 +38,7 @@ const levels = [
       ],
       [[3, 3, 3, 3, 3]],
     ],
-    scoreToBoss: 100,
+    scoreToBoss: 1000,
     bossType: 'boss1',
   },
   {

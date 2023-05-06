@@ -45,4 +45,11 @@ export default class CircularElement extends Element {
   getBottom() {
     return this.position.y + this.radius
   }
+
+  getCenter() {
+    return {
+      x: this.position.x,
+      y: this.position.y,
+    }
+  }
 }

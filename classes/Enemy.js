@@ -83,6 +83,10 @@ export default class Enemy extends SpriteElement {
         }
         this.deleteTimeout = 300
         this.explosionSound.loop = true
+
+        if (this.childElements.length > 0) {
+          this.childElements.forEach((el) => (el.lifePoints = 0))
+        }
       } else {
         this.image = this.explosionImage
         this.nbFrames = 5

@@ -208,6 +208,73 @@ export default class Level {
         })
       }
 
+      if (this.boss.childElements.length > 0) {
+        this.boss.childElements.forEach((el, elIndex) => {
+          if (el.lifePoints > 0) {
+            if (
+              this.player.bomb !== null &&
+              detectRectCollision(this.player.bomb, el)
+            ) {
+              // Player bomb hits child element
+              el.lifePoints--
+              if (el.lifePoints === 0) {
+                this.player.score += el.points
+              } else {
+                el.hit = true
+              }
+            }
+
+            // Player laser hits child element
+            if (this.player.laserBolts.length > 0) {
+              this.player.laserBolts.forEach((laserBolt, laserBoltIndex) => {
+                if (detectRectCollision(laserBolt, el)) {
+                  this.player.laserBolts.splice(laserBoltIndex, 1)
+                  el.lifePoints--
+                  if (el.lifePoints === 0) {
+                    this.player.score += el.points
+                  } else {
+                    el.hit = true
+                  }
+                }
+              })
+            }
+
+            // Player collides with child element
+            if (
+              this.player.shield !== null &&
+              this.player.shield.lifePoints > 0 &&
+              this.player.invicibleTimeout === 0 &&
+              detectRectCollision(this.player.shield, el)
+            ) {
+              el.lifePoints--
+              if (el.lifePoints === 0) {
+                this.player.score += el.points
+              }
+              this.player.shield.lifePoints--
+            }
+
+            if (
+              this.player.invicibleTimeout === 0 &&
+              this.player.deleteTimeout === null &&
+              this.player.lifePoints > 0 &&
+              detectRectCollision(this.player, el)
+            ) {
+              el.lifePoints--
+              if (el.lifePoints === 0) {
+                this.player.score += el.points
+              }
+              this.player.lifePoints--
+            }
+
+            // Child element bolt hits player (TODO if element can shoot)
+          } else {
+            if (el.deleteTimeout === 0) {
+              this.boss.childElements.splice(elIndex, 1)
+            }
+          }
+        })
+      }
+
       if (this.boss.deleteTimeout === 0) {
         this.boss = null
         this.over = true

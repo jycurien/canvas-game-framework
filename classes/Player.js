@@ -172,7 +172,7 @@ export default class Player extends SpriteElement {
       }
     }
 
-    if (this.lifePoints === 0 && this.deleteTimeout === null) {
+    if (this.lifePoints <= 0 && this.deleteTimeout === null) {
       this.image = this.explosionImage
       this.nbFrames = 5
       this.tickDivider = 2

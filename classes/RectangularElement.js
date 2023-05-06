@@ -48,4 +48,11 @@ export default class RectangularElement extends Element {
   getBottom() {
     return this.position.y + this.height
   }
+
+  getCenter() {
+    return {
+      x: this.position.x + 0.5 * this.width,
+      y: this.position.y + 0.5 * this.height,
+    }
+  }
 }
