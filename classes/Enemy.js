@@ -113,7 +113,7 @@ export default class Enemy extends SpriteElement {
           new EnemyBolt({
             canvas: this.canvas,
             position: {
-              x: this.position.x + this.width * (boltData.positionX / 100),
+              x: this.position.x + this.width * boltData.positionX,
               y: this.position.y + this.height,
             },
             velocity: {

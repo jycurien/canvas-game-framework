@@ -30,7 +30,7 @@ const enemyData = {
     maxBoltWaveLength: 1,
     boltData: [
       {
-        positionX: 50,
+        positionX: 0.5,
         velocityX: 0,
       },
     ],
@@ -48,11 +48,11 @@ const enemyData = {
     maxBoltWaveLength: 2,
     boltData: [
       {
-        positionX: 25,
+        positionX: 0.25,
         velocityX: 0,
       },
       {
-        positionX: 75,
+        positionX: 0.75,
         velocityX: 0,
       },
     ],
@@ -70,11 +70,11 @@ const enemyData = {
     maxBoltWaveLength: 2,
     boltData: [
       {
-        positionX: 20,
+        positionX: 0.2,
         velocityX: 0,
       },
       {
-        positionX: 80,
+        positionX: 0.8,
         velocityX: 0,
       },
     ],
@@ -92,7 +92,7 @@ const enemyData = {
     maxBoltWaveLength: 3,
     boltData: [
       {
-        positionX: 50,
+        positionX: 0.5,
         velocityX: 0,
       },
     ],
@@ -110,11 +110,11 @@ const enemyData = {
     maxBoltWaveLength: 4,
     boltData: [
       {
-        positionX: 20,
+        positionX: 0.2,
         velocityX: 0,
       },
       {
-        positionX: 80,
+        positionX: 0.8,
         velocityX: 0,
       },
     ],
@@ -132,11 +132,11 @@ const enemyData = {
     maxBoltWaveLength: 4,
     boltData: [
       {
-        positionX: 20,
+        positionX: 0.2,
         velocityX: 0,
       },
       {
-        positionX: 80,
+        positionX: 0.8,
         velocityX: 0,
       },
     ],
@@ -156,15 +156,15 @@ const enemyData = {
     maxBoltWaveLength: 15,
     boltData: [
       {
-        positionX: 50,
+        positionX: 0.5,
         velocityX: -0.5,
       },
       {
-        positionX: 50,
+        positionX: 0.5,
         velocityX: 0,
       },
       {
-        positionX: 50,
+        positionX: 0.5,
         velocityX: 0.5,
       },
     ],
