@@ -11,7 +11,7 @@ export default class Level {
     number,
     background,
     enemyFormations,
-    scoreToNextLevel,
+    scoreToBoss,
     bossType,
   }) {
     this.ui = ui
@@ -20,7 +20,7 @@ export default class Level {
     this.number = number
     this.background = background
     this.enemyFormations = enemyFormations
-    this.scoreToNextLevel = this.player.score + scoreToNextLevel
+    this.scoreToBoss = this.player.score + scoreToBoss
     this.bossType = bossType
     this.enemySpawnDelay = 180
     this.enemyWaves = []
@@ -283,7 +283,7 @@ export default class Level {
           if (enemy.boltWave.length === 0) {
             enemyWave.enemies.splice(enemyIndex, 1)
 
-            if (this.player.score >= this.scoreToNextLevel) {
+            if (this.player.score >= this.scoreToBoss) {
               this.spawnBossDelay = 240
             }
           }

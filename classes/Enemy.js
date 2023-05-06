@@ -75,7 +75,7 @@ export default class Enemy extends SpriteElement {
   update() {
     super.update()
 
-    if (this.lifePoints === 0 && this.deleteTimeout === null) {
+    if (this.lifePoints <= 0 && this.deleteTimeout === null) {
       if (this instanceof Boss) {
         this.velocity = {
           x: 0,

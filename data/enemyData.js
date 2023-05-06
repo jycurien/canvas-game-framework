@@ -168,6 +168,40 @@ const enemyData = {
         velocityX: 0.5,
       },
     ],
+    subParts: [
+      {
+        type: 'megabolt',
+        relativePosition: {
+          x: 0.5,
+          y: 1.5,
+        },
+        maxLifePoints: 20,
+      },
+      {
+        type: 'megabolt',
+        relativePosition: {
+          x: 0.5,
+          y: 1.5,
+        },
+        maxLifePoints: 20,
+      },
+      {
+        type: 'megabolt',
+        relativePosition: {
+          x: 0.5,
+          y: 1.5,
+        },
+        maxLifePoints: 20,
+      },
+      {
+        type: 'megabolt',
+        relativePosition: {
+          x: 0.5,
+          y: 1.5,
+        },
+        maxLifePoints: 20,
+      },
+    ],
   },
 }
 

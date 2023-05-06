@@ -16,7 +16,7 @@ const levels = [
       },
       velocity: {
         x: 0,
-        y: 2,
+        y: 1,
       },
       image: desertBackgroundImage,
       frameWidth: 753,
@@ -38,7 +38,7 @@ const levels = [
       ],
       [[3, 3, 3, 3, 3]],
     ],
-    scoreToNextLevel: 1000,
+    scoreToBoss: 1000,
     bossType: 'boss1',
   },
   {
@@ -50,7 +50,7 @@ const levels = [
       },
       velocity: {
         x: 0,
-        y: 2,
+        y: 1,
       },
       image: riverBackgroundImage,
       frameWidth: 640,
@@ -79,7 +79,7 @@ const levels = [
         [3, null, 3],
       ],
     ],
-    scoreToNextLevel: 2000,
+    scoreToBoss: 2000,
     bossType: 'boss1',
   },
   {
@@ -125,7 +125,7 @@ const levels = [
         [6, 6, 6],
       ],
     ],
-    scoreToNextLevel: 3000,
+    scoreToBoss: 3000,
     bossType: 'boss1',
   },
 ]
@@ -135,7 +135,7 @@ const getLevels = (index, ui, canvas, player) => {
     return null
   }
 
-  const { number, background, enemyFormations, scoreToNextLevel, bossType } =
+  const { number, background, enemyFormations, scoreToBoss, bossType } =
     levels[index]
 
   return new Level({
@@ -152,7 +152,7 @@ const getLevels = (index, ui, canvas, player) => {
       frameHeight: background.frameHeight,
     }),
     enemyFormations,
-    scoreToNextLevel,
+    scoreToBoss,
     bossType,
   })
 }
