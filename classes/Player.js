@@ -2,8 +2,8 @@ import { rotateDrawing, drawShadow } from '../utils/drawingFunctions'
 import { shipImage, explosionShipImage } from '../images/images'
 import LaserBolt from './LaserBolt'
 import SpriteElement from './SpriteElement'
-import { Shield } from './Shield'
-import { Bomb } from './Bomb'
+import Shield from './Shield'
+import Bomb from './Bomb'
 
 export default class Player extends SpriteElement {
   constructor({ canvas }) {

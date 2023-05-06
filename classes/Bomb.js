@@ -1,7 +1,6 @@
-import { drawCircle } from '../utils/drawingFunctions'
 import CircularElement from './CircularElement'
 
-export class Bomb extends CircularElement {
+export default class Bomb extends CircularElement {
   constructor({ canvas, parentElement }) {
     const radius = 10
     super({

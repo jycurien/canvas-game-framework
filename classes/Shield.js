@@ -1,6 +1,6 @@
 import CircularElement from './CircularElement'
 
-export class Shield extends CircularElement {
+export default class Shield extends CircularElement {
   constructor({ canvas, parentElement }) {
     super({
       canvas,
