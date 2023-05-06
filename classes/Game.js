@@ -1,5 +1,5 @@
 import Player from './Player'
-import getLevels from '../data/getLevels'
+import getLevel from '../data/getLevel'
 import Ui from './Ui'
 
 class Game {
@@ -51,7 +51,7 @@ class Game {
     if (this.level.over) {
       this.levelIndex++
       this.player.laserBolts = []
-      const newLevel = getLevels(
+      const newLevel = getLevel(
         this.levelIndex,
         this.ui,
         this.canvas,
@@ -85,7 +85,7 @@ class Game {
       canvas: this.canvas,
     })
     this.levelIndex = 0
-    this.level = getLevels(0, this.ui, this.canvas, this.player)
+    this.level = getLevel(0, this.ui, this.canvas, this.player)
     if (this.stopMain) {
       cancelAnimationFrame(this.stopMain)
     }
