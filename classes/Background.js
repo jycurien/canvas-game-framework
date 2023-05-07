@@ -31,8 +31,8 @@ export default class Background extends SpriteElement {
     this.position.y = positionY
   }
 
-  update() {
-    super.update()
+  update(tick) {
+    super.update(tick)
     if (this.position.y >= this.canvas.height) {
       this.position.y = 0
     }

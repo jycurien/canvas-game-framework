@@ -11,7 +11,7 @@ export default class Element {
 
   render(ctx, tick) {}
 
-  update() {
+  update(tick) {
     this.position.x += this.velocity.x
     this.position.y += this.velocity.y
   }

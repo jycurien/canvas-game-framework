@@ -61,8 +61,8 @@ export default class SpriteElement extends RectangularElement {
     }
   }
 
-  update() {
-    super.update()
+  update(tick) {
+    super.update(tick)
     if (this.deleteTimeout > 0) {
       this.deleteTimeout--
     }

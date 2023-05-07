@@ -36,13 +36,13 @@ export default class Bomb extends CircularElement {
     }
   }
 
-  update() {
+  update(tick) {
     if (this.explodeDelay > 0) {
       this.explodeDelay--
     } else {
       this.velocity.y = 0
       this.radius += 4
     }
-    super.update()
+    super.update(tick)
   }
 }

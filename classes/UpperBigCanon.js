@@ -33,18 +33,18 @@ export default class UpperBigCanon extends Enemy {
     }
   }
 
-  update() {
+  update(tick) {
     this.position = fixedPosition({
       parentElement: this.parentElement,
       relativePosition: this.relativePosition,
     })
-    super.update()
+    super.update(tick)
     if (this.parentElement.lifePoints <= 0) {
       this.lifePoints = 0
     }
     if (this.childElements.length > 0) {
       this.childElements.forEach((el, elIndex) => {
-        el.update()
+        el.update(tick)
         if (el.deleteTimeout === 0) {
           this.childElements.splice(elIndex, 1)
         }

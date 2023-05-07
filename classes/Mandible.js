@@ -33,12 +33,12 @@ export default class Mandible extends Enemy {
     )
   }
 
-  update() {
+  update(tick) {
     this.position = fixedPosition({
       parentElement: this.parentElement,
       relativePosition: this.relativePosition,
     })
-    super.update()
+    super.update(tick)
     if (this.parentElement.lifePoints <= 0) {
       this.lifePoints = 0
     }

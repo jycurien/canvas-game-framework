@@ -3,6 +3,7 @@ import bombIconImageSrc from '../assets/img/bomb-icon.png'
 import shipImageSrc from '../assets/img/ship-a1.png'
 import explosionShipImageSrc from '../assets/img/explosion-ship.png'
 import boltImageSrc from '../assets/img/laser-bolts.png'
+import bigCanonBoltImageSrc from '../assets/img/big-canon-bolt.png'
 import enemy1ImageSrc from '../assets/img/enemy1.png'
 import enemy2ImageSrc from '../assets/img/enemy2.png'
 import enemy3ImageSrc from '../assets/img/enemy3.png'
@@ -20,14 +21,19 @@ import explosionBoss1ImageSrc from '../assets/img/explosion-boss1.png'
 import megaBoltImageSrc from '../assets/img/megabolt.png'
 import explosionMegaBoltImageSrc from '../assets/img/explosion-megabolt.png'
 import boss2ImageSrc from '../assets/img/boss2.png'
+import explosionBoss2ImageSrc from '../assets/img/explosion-boss2.png'
 import leftSmallMandibleImageSrc from '../assets/img/left-small-mandible.png'
 import rightSmallMandibleImageSrc from '../assets/img/right-small-mandible.png'
+import explosionSmallMandibleImageSrc from '../assets/img/explosion-small-mandible.png'
 import leftBigMandibleImageSrc from '../assets/img/left-big-mandible.png'
 import rightBigMandibleImageSrc from '../assets/img/right-big-mandible.png'
+import explosionBigMandibleImageSrc from '../assets/img/explosion-big-mandible.png'
 import leftUpperBigCanonImageSrc from '../assets/img/left-upper-big-canon.png'
 import rightUpperBigCanonImageSrc from '../assets/img/right-upper-big-canon.png'
+import explosionUpperBigCanonImageSrc from '../assets/img/explosion-upper-big-canon.png'
 import leftLowerBigCanonImageSrc from '../assets/img/left-lower-big-canon.png'
 import rightLowerBigCanonImageSrc from '../assets/img/right-lower-big-canon.png'
+import explosionLowerBigCanonImageSrc from '../assets/img/explosion-lower-big-canon.png'
 import desertBackgroundSrc from '../assets/img/desert-background.png'
 import riverBackgroundSrc from '../assets/img/river-background.png'
 import spaceBackgroundSrc from '../assets/img/space-background.png'
@@ -42,6 +48,8 @@ const explosionShipImage = new Image()
 explosionShipImage.src = explosionShipImageSrc
 const boltImage = new Image()
 boltImage.src = boltImageSrc
+const bigCanonBoltImage = new Image()
+bigCanonBoltImage.src = bigCanonBoltImageSrc
 
 // Enemies
 const enemy1Image = new Image()
@@ -78,22 +86,32 @@ const explosionMegaBoltImage = new Image()
 explosionMegaBoltImage.src = explosionMegaBoltImageSrc
 const boss2Image = new Image()
 boss2Image.src = boss2ImageSrc
+const explosionBoss2Image = new Image()
+explosionBoss2Image.src = explosionBoss2ImageSrc
 const leftSmallMandibleImage = new Image()
 leftSmallMandibleImage.src = leftSmallMandibleImageSrc
 const rightSmallMandibleImage = new Image()
 rightSmallMandibleImage.src = rightSmallMandibleImageSrc
+const explosionSmallMandibleImage = new Image()
+explosionSmallMandibleImage.src = explosionSmallMandibleImageSrc
 const leftBigMandibleImage = new Image()
 leftBigMandibleImage.src = leftBigMandibleImageSrc
 const rightBigMandibleImage = new Image()
 rightBigMandibleImage.src = rightBigMandibleImageSrc
+const explosionBigMandibleImage = new Image()
+explosionBigMandibleImage.src = explosionBigMandibleImageSrc
 const leftUpperBigCanonImage = new Image()
 leftUpperBigCanonImage.src = leftUpperBigCanonImageSrc
 const rightUpperBigCanonImage = new Image()
 rightUpperBigCanonImage.src = rightUpperBigCanonImageSrc
+const explosionUpperBigCanonImage = new Image()
+explosionUpperBigCanonImage.src = explosionUpperBigCanonImageSrc
 const leftLowerBigCanonImage = new Image()
 leftLowerBigCanonImage.src = leftLowerBigCanonImageSrc
 const rightLowerBigCanonImage = new Image()
 rightLowerBigCanonImage.src = rightLowerBigCanonImageSrc
+const explosionLowerBigCanonImage = new Image()
+explosionLowerBigCanonImage.src = explosionLowerBigCanonImageSrc
 
 // BG
 const desertBackgroundImage = new Image()
@@ -109,6 +127,7 @@ export {
   shipImage,
   explosionShipImage,
   boltImage,
+  bigCanonBoltImage,
   enemy1Image,
   explosionEnemy1Image,
   enemy2Image,
@@ -126,14 +145,19 @@ export {
   megaBoltImage,
   explosionMegaBoltImage,
   boss2Image,
+  explosionBoss2Image,
   leftSmallMandibleImage,
   rightSmallMandibleImage,
+  explosionSmallMandibleImage,
   leftBigMandibleImage,
   rightBigMandibleImage,
+  explosionBigMandibleImage,
   leftUpperBigCanonImage,
   rightUpperBigCanonImage,
+  explosionUpperBigCanonImage,
   leftLowerBigCanonImage,
   rightLowerBigCanonImage,
+  explosionLowerBigCanonImage,
   desertBackgroundImage,
   riverBackgroundImage,
   spaceBackgroundImage,

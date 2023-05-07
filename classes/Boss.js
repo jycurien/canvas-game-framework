@@ -41,8 +41,8 @@ export default class Boss extends Enemy {
     }
   }
 
-  update() {
-    super.update()
+  update(tick) {
+    super.update(tick)
     if (
       this.getLeft() < -this.width / 2 ||
       this.getRight() > this.canvas.width + this.width / 2
@@ -64,8 +64,8 @@ export default class Boss extends Enemy {
     }
 
     if (this.childElements.length > 0) {
-      this.childElements.forEach((el) => {
-        el.update()
+      this.childElements.forEach((el, elIndex) => {
+        el.update(tick)
         if (el.deleteTimeout === 0) {
           this.childElements.splice(elIndex, 1)
         }

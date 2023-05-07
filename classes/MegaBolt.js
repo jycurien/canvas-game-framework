@@ -21,7 +21,7 @@ export default class MegaBolt extends Enemy {
     this.radius = radius
   }
 
-  update() {
+  update(tick) {
     this.position = circularMovement({
       element: this,
       parentElement: this.parentElement,
@@ -30,7 +30,7 @@ export default class MegaBolt extends Enemy {
       radius: this.radius,
     })
     this.angle += this.angleSpeed
-    super.update()
+    super.update(tick)
     if (this.parentElement.lifePoints <= 0) {
       this.lifePoints = 0
     }

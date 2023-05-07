@@ -104,8 +104,8 @@ export default class Enemy extends SpriteElement {
     super.render(ctx, tick)
   }
 
-  update() {
-    super.update()
+  update(tick) {
+    super.update(tick)
 
     if (this.lifePoints <= 0 && this.deleteTimeout === null) {
       if (this instanceof Boss) {
@@ -126,7 +126,7 @@ export default class Enemy extends SpriteElement {
 
     if (this.boltWave.length > 0) {
       this.boltWave.forEach((bolt, index) => {
-        bolt.update()
+        bolt.update(tick)
         if (bolt.getTop() > this.canvas.height) {
           this.boltWave.splice(index, 1)
         }

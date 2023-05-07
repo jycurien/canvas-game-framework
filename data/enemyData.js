@@ -16,14 +16,19 @@ import {
   megaBoltImage,
   explosionMegaBoltImage,
   boss2Image,
+  explosionBoss2Image,
   leftSmallMandibleImage,
   rightSmallMandibleImage,
+  explosionSmallMandibleImage,
   leftBigMandibleImage,
   rightBigMandibleImage,
+  explosionBigMandibleImage,
   leftUpperBigCanonImage,
   rightUpperBigCanonImage,
+  explosionUpperBigCanonImage,
   leftLowerBigCanonImage,
   rightLowerBigCanonImage,
+  explosionLowerBigCanonImage,
 } from '../images/images'
 
 const enemyData = {
@@ -235,7 +240,7 @@ const enemyData = {
   boss2: {
     type: 'boss2',
     image: boss2Image,
-    explosionImage: explosionBoss1Image, // TODO
+    explosionImage: explosionBoss2Image,
     scorePoints: 1500,
     maxLifePoints: 600,
     nbFrames: 4,
@@ -264,7 +269,7 @@ const enemyData = {
         type: 'mandible',
         maxLifePoints: 50,
         image: leftSmallMandibleImage,
-        explosionImage: explosionMegaBoltImage, // TODO
+        explosionImage: explosionSmallMandibleImage,
         scorePoints: 100,
         nbFrames: 1,
         width: 18,
@@ -284,7 +289,7 @@ const enemyData = {
         type: 'mandible',
         maxLifePoints: 50,
         image: rightSmallMandibleImage,
-        explosionImage: explosionMegaBoltImage, // TODO
+        explosionImage: explosionSmallMandibleImage,
         scorePoints: 100,
         nbFrames: 1,
         width: 18,
@@ -304,7 +309,7 @@ const enemyData = {
         type: 'mandible',
         maxLifePoints: 50,
         image: leftBigMandibleImage,
-        explosionImage: explosionMegaBoltImage, // TODO
+        explosionImage: explosionBigMandibleImage,
         scorePoints: 100,
         nbFrames: 1,
         width: 29,
@@ -324,7 +329,7 @@ const enemyData = {
         type: 'mandible',
         maxLifePoints: 50,
         image: rightBigMandibleImage,
-        explosionImage: explosionMegaBoltImage, // TODO
+        explosionImage: explosionBigMandibleImage,
         scorePoints: 100,
         nbFrames: 1,
         width: 29,
@@ -344,7 +349,7 @@ const enemyData = {
         type: 'upper-big-canon',
         maxLifePoints: 50,
         image: leftUpperBigCanonImage,
-        explosionImage: explosionMegaBoltImage, // TODO
+        explosionImage: explosionUpperBigCanonImage,
         scorePoints: 100,
         nbFrames: 5,
         width: 42,
@@ -359,7 +364,7 @@ const enemyData = {
             type: 'lower-big-canon',
             maxLifePoints: 50,
             image: leftLowerBigCanonImage,
-            explosionImage: explosionMegaBoltImage, // TODO
+            explosionImage: explosionLowerBigCanonImage,
             scorePoints: 100,
             nbFrames: 5,
             width: 10,
@@ -369,6 +374,13 @@ const enemyData = {
               x: 0.08,
               y: 0.78,
             },
+            maxBoltWaveLength: 10,
+            boltData: [
+              {
+                positionX: 0.7,
+                velocityX: 0,
+              },
+            ],
           },
         ],
       },
@@ -376,7 +388,7 @@ const enemyData = {
         type: 'upper-big-canon',
         maxLifePoints: 50,
         image: rightUpperBigCanonImage,
-        explosionImage: explosionMegaBoltImage, // TODO
+        explosionImage: explosionUpperBigCanonImage,
         scorePoints: 100,
         nbFrames: 5,
         width: 42,
@@ -391,7 +403,7 @@ const enemyData = {
             type: 'lower-big-canon',
             maxLifePoints: 50,
             image: rightLowerBigCanonImage,
-            explosionImage: explosionMegaBoltImage, // TODO
+            explosionImage: explosionLowerBigCanonImage,
             scorePoints: 100,
             nbFrames: 5,
             width: 10,
@@ -401,6 +413,13 @@ const enemyData = {
               x: 0.6819,
               y: 0.78,
             },
+            maxBoltWaveLength: 10,
+            boltData: [
+              {
+                positionX: 0.7,
+                velocityX: 0,
+              },
+            ],
           },
         ],
       },

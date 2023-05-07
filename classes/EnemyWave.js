@@ -82,7 +82,7 @@ export default class EnemyWave extends Element {
     }
   }
 
-  update() {
+  update(tick) {
     this.left += this.velocity.x
     this.right += this.velocity.x
     if (this.enemies.length > 0) {
@@ -96,7 +96,7 @@ export default class EnemyWave extends Element {
         })
       }
       this.enemies.forEach((enemy, enemyIndex) => {
-        enemy.update()
+        enemy.update(tick)
         if (enemy.getTop() > this.canvas.height) {
           this.enemies.splice(enemyIndex, 1)
         }

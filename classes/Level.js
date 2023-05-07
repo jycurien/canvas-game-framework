@@ -59,7 +59,7 @@ export default class Level {
     this.enemyWaves.forEach((enemyWave) => enemyWave.render(ctx, tick))
   }
 
-  update() {
+  update(tick) {
     if (this.startDelay > 0) {
       this.startDelay--
       if (this.startDelay === 0) {
@@ -69,8 +69,8 @@ export default class Level {
       return
     }
 
-    this.player.update()
-    this.background.update()
+    this.player.update(tick)
+    this.background.update(tick)
 
     // Background horizontal scroll
     if (
@@ -136,15 +136,15 @@ export default class Level {
           y: -200,
         },
         velocity: {
-          x: Math.random() - 0.5 > 0 ? 1 : -1,
-          y: 1,
+          x: Math.random() - 0.5 > 0 ? 0.8 : -0.8,
+          y: 0.8,
         },
         data: bossData,
       })
     }
 
     if (this.boss !== null) {
-      this.boss.update()
+      this.boss.update(tick)
       // Player bomb hits boss
       if (
         this.player.bomb !== null &&
@@ -285,7 +285,7 @@ export default class Level {
 
           // Sub Elements
           if (el.childElements && el.childElements.length > 0) {
-            el.forEach((subEl, subElIndex) => {
+            el.childElements.forEach((subEl, subElIndex) => {
               if (subEl.lifePoints > 0) {
                 if (
                   this.player.bomb !== null &&
@@ -345,6 +345,28 @@ export default class Level {
                 }
 
                 // Child Sub element bolt hits player (TODO if element can shoot)
+                if (
+                  subEl.boltWave.length > 0 &&
+                  this.player.invicibleTimeout === 0 &&
+                  this.player.deleteTimeout === null &&
+                  this.player.lifePoints > 0
+                ) {
+                  subEl.boltWave.forEach((subElBolt, subElBoltIndex) => {
+                    if (
+                      this.player.shield !== null &&
+                      this.player.shield.lifePoints > 0 &&
+                      detectRectCollision(subElBolt, this.player.shield)
+                    ) {
+                      this.player.shield.lifePoints--
+                      subEl.boltWave.splice(subElBoltIndex, 1)
+                    }
+
+                    if (detectRectCollision(subElBolt, this.player)) {
+                      this.player.lifePoints--
+                      subEl.boltWave.splice(subElBoltIndex, 1)
+                    }
+                  })
+                }
               }
             })
           }
@@ -358,7 +380,7 @@ export default class Level {
     }
 
     this.enemyWaves.forEach((enemyWave, enemyWaveIndex) => {
-      enemyWave.update()
+      enemyWave.update(tick)
 
       enemyWave.enemies.forEach((enemy, enemyIndex) => {
         // Player bomb hits enemy

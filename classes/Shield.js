@@ -23,7 +23,7 @@ export default class Shield extends CircularElement {
     }
   }
 
-  update() {
+  update(tick) {
     this.position = {
       x: this.parentElement.position.x + this.parentElement.width / 2,
       y: this.parentElement.position.y + this.parentElement.height / 2,

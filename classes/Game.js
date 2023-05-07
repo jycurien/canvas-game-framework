@@ -46,7 +46,7 @@ class Game {
   }
 
   update() {
-    this.level.update()
+    this.level.update(this.tick)
 
     if (this.level.over) {
       this.levelIndex++

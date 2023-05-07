@@ -162,7 +162,7 @@ export default class Player extends SpriteElement {
     }
   }
 
-  update() {
+  update(tick) {
     if (this.deleteTimeout !== null && this.deleteTimeout === 0) {
       this.opacity = 0
       if (this.lives > 0) {
@@ -205,7 +205,7 @@ export default class Player extends SpriteElement {
       this.velocity.y = 0
     }
 
-    super.update()
+    super.update(tick)
 
     if (this.getLeft() < 0) {
       this.position.x = 0
@@ -236,21 +236,21 @@ export default class Player extends SpriteElement {
     }
 
     this.laserBolts.forEach((laserBolt, index) => {
-      laserBolt.update()
+      laserBolt.update(tick)
       if (laserBolt.getBottom() < 0) {
         this.laserBolts.splice(index, 1)
       }
     })
 
     if (this.shield !== null) {
-      this.shield.update()
+      this.shield.update(tick)
       if (this.shield.lifePoints === 0) {
         this.shield = null
       }
     }
 
     if (this.bomb !== null) {
-      this.bomb.update()
+      this.bomb.update(tick)
       if (this.bomb.radius >= 250) {
         this.bomb = null
       }
