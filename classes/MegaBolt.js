@@ -31,5 +31,8 @@ export default class MegaBolt extends Enemy {
     })
     this.angle += this.angleSpeed
     super.update()
+    if (this.parentElement.lifePoints <= 0) {
+      this.lifePoints = 0
+    }
   }
 }

@@ -55,10 +55,33 @@ export default class Enemy extends SpriteElement {
           x: 0,
           y: -10,
         }
+      } else if (this.type === 'boss2') {
+        spread = {
+          x: -50,
+          y: -10,
+        }
       } else if (this.type === 'boss2' || this.type === 'mandible') {
         spread = {
-          x: -5,
+          x: -10,
           y: -10,
+        }
+      } else if (this.type === 'upper-big-canon') {
+        offset = {
+          x: -10,
+          y: 2,
+        }
+        spread = {
+          x: -10,
+          y: -25,
+        }
+      } else if (this.type === 'lower-big-canon') {
+        offset = {
+          x: 0,
+          y: -5,
+        }
+        spread = {
+          x: -1,
+          y: 0,
         }
       }
       drawShadow({
@@ -92,10 +115,6 @@ export default class Enemy extends SpriteElement {
         }
         this.deleteTimeout = 300
         this.explosionSound.loop = true
-
-        if (this.childElements.length > 0) {
-          this.childElements.forEach((el) => (el.lifePoints = 0))
-        }
       } else {
         this.image = this.explosionImage
         this.nbFrames = 5

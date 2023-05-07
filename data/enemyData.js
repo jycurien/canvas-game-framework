@@ -19,6 +19,11 @@ import {
   leftSmallMandibleImage,
   rightSmallMandibleImage,
   leftBigMandibleImage,
+  rightBigMandibleImage,
+  leftUpperBigCanonImage,
+  rightUpperBigCanonImage,
+  leftLowerBigCanonImage,
+  rightLowerBigCanonImage,
 } from '../images/images'
 
 const enemyData = {
@@ -309,11 +314,95 @@ const enemyData = {
           x: 0.0912,
           y: 0.818,
         },
-        rotation: 0.1,
+        rotation: 0.05,
         rotationOrigin: {
           x: 1,
           y: 0.267,
         },
+      },
+      {
+        type: 'mandible',
+        maxLifePoints: 50,
+        image: rightBigMandibleImage,
+        explosionImage: explosionMegaBoltImage, // TODO
+        scorePoints: 100,
+        nbFrames: 1,
+        width: 29,
+        height: 71,
+        scale: 2,
+        relativePosition: {
+          x: 0.687,
+          y: 0.818,
+        },
+        rotation: -0.05,
+        rotationOrigin: {
+          x: 0,
+          y: 0.267,
+        },
+      },
+      {
+        type: 'upper-big-canon',
+        maxLifePoints: 50,
+        image: leftUpperBigCanonImage,
+        explosionImage: explosionMegaBoltImage, // TODO
+        scorePoints: 100,
+        nbFrames: 5,
+        width: 42,
+        height: 54,
+        scale: 2,
+        relativePosition: {
+          x: -0.18,
+          y: 0.268,
+        },
+        childElements: [
+          {
+            type: 'lower-big-canon',
+            maxLifePoints: 50,
+            image: leftLowerBigCanonImage,
+            explosionImage: explosionMegaBoltImage, // TODO
+            scorePoints: 100,
+            nbFrames: 5,
+            width: 10,
+            height: 49,
+            scale: 2,
+            relativePosition: {
+              x: 0.08,
+              y: 0.78,
+            },
+          },
+        ],
+      },
+      {
+        type: 'upper-big-canon',
+        maxLifePoints: 50,
+        image: rightUpperBigCanonImage,
+        explosionImage: explosionMegaBoltImage, // TODO
+        scorePoints: 100,
+        nbFrames: 5,
+        width: 42,
+        height: 54,
+        scale: 2,
+        relativePosition: {
+          x: 0.85,
+          y: 0.268,
+        },
+        childElements: [
+          {
+            type: 'lower-big-canon',
+            maxLifePoints: 50,
+            image: rightLowerBigCanonImage,
+            explosionImage: explosionMegaBoltImage, // TODO
+            scorePoints: 100,
+            nbFrames: 5,
+            width: 10,
+            height: 49,
+            scale: 2,
+            relativePosition: {
+              x: 0.6819,
+              y: 0.78,
+            },
+          },
+        ],
       },
     ],
   },

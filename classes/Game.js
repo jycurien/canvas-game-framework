@@ -47,7 +47,7 @@ class Game {
 
   update() {
     this.level.update()
-    return
+
     if (this.level.over) {
       this.levelIndex++
       this.player.laserBolts = []

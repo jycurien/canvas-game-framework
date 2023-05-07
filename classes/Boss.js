@@ -66,6 +66,9 @@ export default class Boss extends Enemy {
     if (this.childElements.length > 0) {
       this.childElements.forEach((el) => {
         el.update()
+        if (el.deleteTimeout === 0) {
+          this.childElements.splice(elIndex, 1)
+        }
       })
     }
 

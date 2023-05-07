@@ -26,37 +26,37 @@ export default class Level {
     this.enemyWaves = []
     this.over = false
     this.spawnBossDelay = null
-    // this.boss = null
+    this.boss = null
     this.startDelay = 120
     this.ui.backgroundColor = 'black'
     this.ui.opacity = 0.8
     this.ui.message = `LEVEL ${this.number}`
 
-    this.boss = new Boss({
-      canvas: this.canvas,
-      position: {
-        x: 200,
-        y: 300,
-      },
-      velocity: {
-        x: 0,
-        y: 0,
-      },
-      data: enemyData.boss2,
-    })
+    // this.boss = new Boss({
+    //   canvas: this.canvas,
+    //   position: {
+    //     x: 180,
+    //     y: 300,
+    //   },
+    //   velocity: {
+    //     x: 0,
+    //     y: 0,
+    //   },
+    //   data: enemyData.boss2,
+    // })
   }
 
   render(ctx, tick) {
     this.background.render(ctx, tick)
-    this.boss.render(ctx, tick)
-    // if (this.startDelay > 0) {
-    //   return
-    // }
-    // this.player.render(ctx, tick)
-    // if (this.boss !== null) {
-    //   this.boss.render(ctx, tick)
-    // }
-    // this.enemyWaves.forEach((enemyWave) => enemyWave.render(ctx, tick))
+    // this.boss.render(ctx, tick)
+    if (this.startDelay > 0) {
+      return
+    }
+    this.player.render(ctx, tick)
+    if (this.boss !== null) {
+      this.boss.render(ctx, tick)
+    }
+    this.enemyWaves.forEach((enemyWave) => enemyWave.render(ctx, tick))
   }
 
   update() {
@@ -68,7 +68,7 @@ export default class Level {
       }
       return
     }
-    return
+
     this.player.update()
     this.background.update()
 
@@ -281,10 +281,72 @@ export default class Level {
             }
 
             // Child element bolt hits player (TODO if element can shoot)
-          } else {
-            if (el.deleteTimeout === 0) {
-              this.boss.childElements.splice(elIndex, 1)
-            }
+          }
+
+          // Sub Elements
+          if (el.childElements && el.childElements.length > 0) {
+            el.forEach((subEl, subElIndex) => {
+              if (subEl.lifePoints > 0) {
+                if (
+                  this.player.bomb !== null &&
+                  detectRectCollision(this.player.bomb, subEl)
+                ) {
+                  // Player bomb hits child element
+                  subEl.lifePoints--
+                  if (subEl.lifePoints === 0) {
+                    this.player.score += subEl.points
+                  } else {
+                    subEl.hit = true
+                  }
+                }
+
+                // Player laser hits child element
+                if (this.player.laserBolts.length > 0) {
+                  this.player.laserBolts.forEach(
+                    (laserBolt, laserBoltIndex) => {
+                      if (detectRectCollision(laserBolt, subEl)) {
+                        this.player.laserBolts.splice(laserBoltIndex, 1)
+                        subEl.lifePoints--
+                        if (subEl.lifePoints === 0) {
+                          this.player.score += subEl.points
+                        } else {
+                          subEl.hit = true
+                        }
+                      }
+                    }
+                  )
+                }
+
+                // Player collides with child element
+                if (
+                  this.player.shield !== null &&
+                  this.player.shield.lifePoints > 0 &&
+                  this.player.invicibleTimeout === 0 &&
+                  detectRectCollision(this.player.shield, subEl)
+                ) {
+                  subEl.lifePoints--
+                  if (subEl.lifePoints === 0) {
+                    this.player.score += subEl.points
+                  }
+                  this.player.shield.lifePoints--
+                }
+
+                if (
+                  this.player.invicibleTimeout === 0 &&
+                  this.player.deleteTimeout === null &&
+                  this.player.lifePoints > 0 &&
+                  detectRectCollision(this.player, subEl)
+                ) {
+                  subEl.lifePoints--
+                  if (subEl.lifePoints === 0) {
+                    this.player.score += subEl.points
+                  }
+                  this.player.lifePoints--
+                }
+
+                // Child Sub element bolt hits player (TODO if element can shoot)
+              }
+            })
           }
         })
       }

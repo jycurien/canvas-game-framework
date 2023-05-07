@@ -23,6 +23,11 @@ import boss2ImageSrc from '../assets/img/boss2.png'
 import leftSmallMandibleImageSrc from '../assets/img/left-small-mandible.png'
 import rightSmallMandibleImageSrc from '../assets/img/right-small-mandible.png'
 import leftBigMandibleImageSrc from '../assets/img/left-big-mandible.png'
+import rightBigMandibleImageSrc from '../assets/img/right-big-mandible.png'
+import leftUpperBigCanonImageSrc from '../assets/img/left-upper-big-canon.png'
+import rightUpperBigCanonImageSrc from '../assets/img/right-upper-big-canon.png'
+import leftLowerBigCanonImageSrc from '../assets/img/left-lower-big-canon.png'
+import rightLowerBigCanonImageSrc from '../assets/img/right-lower-big-canon.png'
 import desertBackgroundSrc from '../assets/img/desert-background.png'
 import riverBackgroundSrc from '../assets/img/river-background.png'
 import spaceBackgroundSrc from '../assets/img/space-background.png'
@@ -79,6 +84,16 @@ const rightSmallMandibleImage = new Image()
 rightSmallMandibleImage.src = rightSmallMandibleImageSrc
 const leftBigMandibleImage = new Image()
 leftBigMandibleImage.src = leftBigMandibleImageSrc
+const rightBigMandibleImage = new Image()
+rightBigMandibleImage.src = rightBigMandibleImageSrc
+const leftUpperBigCanonImage = new Image()
+leftUpperBigCanonImage.src = leftUpperBigCanonImageSrc
+const rightUpperBigCanonImage = new Image()
+rightUpperBigCanonImage.src = rightUpperBigCanonImageSrc
+const leftLowerBigCanonImage = new Image()
+leftLowerBigCanonImage.src = leftLowerBigCanonImageSrc
+const rightLowerBigCanonImage = new Image()
+rightLowerBigCanonImage.src = rightLowerBigCanonImageSrc
 
 // BG
 const desertBackgroundImage = new Image()
@@ -114,6 +129,11 @@ export {
   leftSmallMandibleImage,
   rightSmallMandibleImage,
   leftBigMandibleImage,
+  rightBigMandibleImage,
+  leftUpperBigCanonImage,
+  rightUpperBigCanonImage,
+  leftLowerBigCanonImage,
+  rightLowerBigCanonImage,
   desertBackgroundImage,
   riverBackgroundImage,
   spaceBackgroundImage,

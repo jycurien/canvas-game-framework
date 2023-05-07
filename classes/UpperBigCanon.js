@@ -1,8 +1,8 @@
 import { fixedPosition } from '../utils/relativePositionFunctions'
-import { rotateDrawing } from '../utils/drawingFunctions'
+import getChildElement from '../childElements/getChildElement'
 import Enemy from './Enemy'
 
-export default class Mandible extends Enemy {
+export default class UpperBigCanon extends Enemy {
   constructor({ canvas, parentElement, data }) {
     const position = fixedPosition({
       parentElement,
@@ -15,22 +15,22 @@ export default class Mandible extends Enemy {
     super({ canvas, position, velocity, data })
     this.parentElement = parentElement
     this.relativePosition = data.relativePosition
-    this.rotation = data.rotation
-    this.rotationOrigin = data.rotationOrigin
+    this.childElements = []
+    data.childElements.forEach((elementData) =>
+      this.childElements.push(
+        getChildElement({ elementData, parentElement: this })
+      )
+    )
   }
 
   render(ctx, tick) {
-    const rotation = this.rotation * Math.sin(tick * 6)
+    super.render(ctx, tick)
 
-    rotateDrawing(
-      ctx,
-      {
-        x: this.position.x + this.rotationOrigin.x * this.width,
-        y: this.position.y + this.rotationOrigin.y * this.height,
-      },
-      rotation,
-      () => super.render(ctx, tick)
-    )
+    if (this.childElements.length > 0) {
+      this.childElements.forEach((el) => {
+        el.render(ctx, tick)
+      })
+    }
   }
 
   update() {
@@ -41,6 +41,14 @@ export default class Mandible extends Enemy {
     super.update()
     if (this.parentElement.lifePoints <= 0) {
       this.lifePoints = 0
+    }
+    if (this.childElements.length > 0) {
+      this.childElements.forEach((el, elIndex) => {
+        el.update()
+        if (el.deleteTimeout === 0) {
+          this.childElements.splice(elIndex, 1)
+        }
+      })
     }
   }
 }
