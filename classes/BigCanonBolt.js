@@ -5,8 +5,10 @@ export default class BigCanonBolt extends SpriteElement {
   constructor({ canvas, position, velocity }) {
     const scale = 1
     const width = 7
+    const height = 55
 
-    position.x -= (width * scale) / 2
+    position.x -= (width * scale) / 3
+    position.y -= height * scale - 6
 
     super({
       canvas,
@@ -15,8 +17,8 @@ export default class BigCanonBolt extends SpriteElement {
       image: bigCanonBoltImage,
       nbFrames: 3,
       tickDivider: 2,
-      frameWidth: 7,
-      frameHeight: 55,
+      frameWidth: width,
+      frameHeight: height,
       scale,
     })
   }

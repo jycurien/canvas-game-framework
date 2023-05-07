@@ -377,7 +377,7 @@ const enemyData = {
             maxBoltWaveLength: 10,
             boltData: [
               {
-                positionX: 0.7,
+                positionX: 0.35,
                 velocityX: 0,
               },
             ],
@@ -416,7 +416,7 @@ const enemyData = {
             maxBoltWaveLength: 10,
             boltData: [
               {
-                positionX: 0.7,
+                positionX: 0.65,
                 velocityX: 0,
               },
             ],

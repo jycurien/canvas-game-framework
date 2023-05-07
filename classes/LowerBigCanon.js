@@ -44,11 +44,11 @@ export default class LowerBigCanon extends Enemy {
             canvas: this.canvas,
             position: {
               x: this.position.x + this.width * boltData.positionX,
-              y: this.position.y + this.height - 5,
+              y: this.position.y + this.height,
             },
             velocity: {
               x: boltData.velocityX,
-              y: 5,
+              y: 6,
             },
           })
         )
