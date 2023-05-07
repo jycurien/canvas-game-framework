@@ -15,6 +15,10 @@ import {
   explosionBoss1Image,
   megaBoltImage,
   explosionMegaBoltImage,
+  boss2Image,
+  leftSmallMandibleImage,
+  rightSmallMandibleImage,
+  leftBigMandibleImage,
 } from '../images/images'
 
 const enemyData = {
@@ -220,6 +224,96 @@ const enemyData = {
         startAngle: 1.5 * Math.PI,
         angleSpeed: 0.01,
         relativeRadius: 0.75,
+      },
+    ],
+  },
+  boss2: {
+    type: 'boss2',
+    image: boss2Image,
+    explosionImage: explosionBoss1Image, // TODO
+    scorePoints: 1500,
+    maxLifePoints: 600,
+    nbFrames: 4,
+    tickDivider: 8,
+    width: 129,
+    height: 114,
+    colGap: 0,
+    scale: 2,
+    maxBoltWaveLength: 15,
+    boltData: [
+      {
+        positionX: 0.4,
+        velocityX: 0,
+      },
+      {
+        positionX: 0.5,
+        velocityX: 0,
+      },
+      {
+        positionX: 0.6,
+        velocityX: 0,
+      },
+    ],
+    childElements: [
+      {
+        type: 'mandible',
+        maxLifePoints: 50,
+        image: leftSmallMandibleImage,
+        explosionImage: explosionMegaBoltImage, // TODO
+        scorePoints: 100,
+        nbFrames: 1,
+        width: 18,
+        height: 31,
+        scale: 2,
+        relativePosition: {
+          x: 0.345,
+          y: 0.945,
+        },
+        rotation: 0.05,
+        rotationOrigin: {
+          x: 0.5,
+          y: 0,
+        },
+      },
+      {
+        type: 'mandible',
+        maxLifePoints: 50,
+        image: rightSmallMandibleImage,
+        explosionImage: explosionMegaBoltImage, // TODO
+        scorePoints: 100,
+        nbFrames: 1,
+        width: 18,
+        height: 31,
+        scale: 2,
+        relativePosition: {
+          x: 0.5155,
+          y: 0.945,
+        },
+        rotation: -0.05,
+        rotationOrigin: {
+          x: 0.5,
+          y: 0,
+        },
+      },
+      {
+        type: 'mandible',
+        maxLifePoints: 50,
+        image: leftBigMandibleImage,
+        explosionImage: explosionMegaBoltImage, // TODO
+        scorePoints: 100,
+        nbFrames: 1,
+        width: 29,
+        height: 71,
+        scale: 2,
+        relativePosition: {
+          x: 0.0912,
+          y: 0.818,
+        },
+        rotation: 0.1,
+        rotationOrigin: {
+          x: 1,
+          y: 0.267,
+        },
       },
     ],
   },

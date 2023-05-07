@@ -2,6 +2,7 @@ import lifeImageSrc from '../assets/img/life.png'
 import bombIconImageSrc from '../assets/img/bomb-icon.png'
 import shipImageSrc from '../assets/img/ship-a1.png'
 import explosionShipImageSrc from '../assets/img/explosion-ship.png'
+import boltImageSrc from '../assets/img/laser-bolts.png'
 import enemy1ImageSrc from '../assets/img/enemy1.png'
 import enemy2ImageSrc from '../assets/img/enemy2.png'
 import enemy3ImageSrc from '../assets/img/enemy3.png'
@@ -18,7 +19,10 @@ import boss1ImageSrc from '../assets/img/boss1.png'
 import explosionBoss1ImageSrc from '../assets/img/explosion-boss1.png'
 import megaBoltImageSrc from '../assets/img/megabolt.png'
 import explosionMegaBoltImageSrc from '../assets/img/explosion-megabolt.png'
-import boltImageSrc from '../assets/img/laser-bolts.png'
+import boss2ImageSrc from '../assets/img/boss2.png'
+import leftSmallMandibleImageSrc from '../assets/img/left-small-mandible.png'
+import rightSmallMandibleImageSrc from '../assets/img/right-small-mandible.png'
+import leftBigMandibleImageSrc from '../assets/img/left-big-mandible.png'
 import desertBackgroundSrc from '../assets/img/desert-background.png'
 import riverBackgroundSrc from '../assets/img/river-background.png'
 import spaceBackgroundSrc from '../assets/img/space-background.png'
@@ -67,6 +71,14 @@ const megaBoltImage = new Image()
 megaBoltImage.src = megaBoltImageSrc
 const explosionMegaBoltImage = new Image()
 explosionMegaBoltImage.src = explosionMegaBoltImageSrc
+const boss2Image = new Image()
+boss2Image.src = boss2ImageSrc
+const leftSmallMandibleImage = new Image()
+leftSmallMandibleImage.src = leftSmallMandibleImageSrc
+const rightSmallMandibleImage = new Image()
+rightSmallMandibleImage.src = rightSmallMandibleImageSrc
+const leftBigMandibleImage = new Image()
+leftBigMandibleImage.src = leftBigMandibleImageSrc
 
 // BG
 const desertBackgroundImage = new Image()
@@ -98,6 +110,10 @@ export {
   explosionBoss1Image,
   megaBoltImage,
   explosionMegaBoltImage,
+  boss2Image,
+  leftSmallMandibleImage,
+  rightSmallMandibleImage,
+  leftBigMandibleImage,
   desertBackgroundImage,
   riverBackgroundImage,
   spaceBackgroundImage,

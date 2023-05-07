@@ -80,7 +80,7 @@ const levels = [
       ],
     ],
     scoreToBoss: 2000,
-    bossType: 'boss1',
+    bossType: 'boss2',
   },
   {
     number: 3,
@@ -126,7 +126,7 @@ const levels = [
       ],
     ],
     scoreToBoss: 3000,
-    bossType: 'boss1',
+    bossType: 'boss2',
   },
 ]
 

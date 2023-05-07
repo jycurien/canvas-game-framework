@@ -26,23 +26,37 @@ export default class Level {
     this.enemyWaves = []
     this.over = false
     this.spawnBossDelay = null
-    this.boss = null
+    // this.boss = null
     this.startDelay = 120
     this.ui.backgroundColor = 'black'
     this.ui.opacity = 0.8
     this.ui.message = `LEVEL ${this.number}`
+
+    this.boss = new Boss({
+      canvas: this.canvas,
+      position: {
+        x: 200,
+        y: 300,
+      },
+      velocity: {
+        x: 0,
+        y: 0,
+      },
+      data: enemyData.boss2,
+    })
   }
 
   render(ctx, tick) {
     this.background.render(ctx, tick)
-    if (this.startDelay > 0) {
-      return
-    }
-    this.player.render(ctx, tick)
-    if (this.boss !== null) {
-      this.boss.render(ctx, tick)
-    }
-    this.enemyWaves.forEach((enemyWave) => enemyWave.render(ctx, tick))
+    this.boss.render(ctx, tick)
+    // if (this.startDelay > 0) {
+    //   return
+    // }
+    // this.player.render(ctx, tick)
+    // if (this.boss !== null) {
+    //   this.boss.render(ctx, tick)
+    // }
+    // this.enemyWaves.forEach((enemyWave) => enemyWave.render(ctx, tick))
   }
 
   update() {
@@ -54,7 +68,7 @@ export default class Level {
       }
       return
     }
-
+    return
     this.player.update()
     this.background.update()
 

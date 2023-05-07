@@ -14,8 +14,9 @@ export const circularMovement = ({
 }
 
 export const fixedPosition = ({ parentElement, relativePosition }) => {
+  // This works only for rectangular elements, TODO make it compatible with circular elements
   return {
-    x: parentElement.position.x * relativePosition.x,
-    y: parentElement.position.y * relativePosition.y,
+    x: parentElement.position.x + parentElement.width * relativePosition.x,
+    y: parentElement.position.y + parentElement.height * relativePosition.y,
   }
 }

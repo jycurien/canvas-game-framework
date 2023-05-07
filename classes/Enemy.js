@@ -11,7 +11,7 @@ export default class Enemy extends SpriteElement {
       velocity,
       image: data.image,
       nbFrames: data.nbFrames,
-      tickDivider: 4,
+      tickDivider: data.tickDivider ?? 4,
       frameWidth: data.width,
       frameHeight: data.height,
       scale: data.scale ?? 1,
@@ -38,6 +38,13 @@ export default class Enemy extends SpriteElement {
         x: 0,
         y: 0,
       }
+
+      let spread = {
+        x: 5,
+        y: 0,
+      }
+
+      // TODO faire un switch ou un objet de config des shadows
       if (this.type === 3) {
         offset = {
           x: 0,
@@ -48,15 +55,17 @@ export default class Enemy extends SpriteElement {
           x: 0,
           y: -10,
         }
+      } else if (this.type === 'boss2' || this.type === 'mandible') {
+        spread = {
+          x: -5,
+          y: -10,
+        }
       }
       drawShadow({
         ctx,
         element: this,
         offset,
-        spread: {
-          x: 5,
-          y: 0,
-        },
+        spread,
         fillStyle: 'rgba(0, 0, 0, 0.2)',
       })
     }
