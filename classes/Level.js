@@ -97,7 +97,7 @@ export default class Level {
           this.enemyFormations[
             Math.floor(Math.random() * this.enemyFormations.length)
           ]
-        const x = (Math.random() * this.canvas.width) / 2
+        const x = Math.floor((Math.random() * this.canvas.width) / 2)
         this.enemyWaves.push(
           new EnemyWave({
             canvas: this.canvas,
@@ -111,10 +111,10 @@ export default class Level {
             },
             formation,
             horizontalBoundaries: {
-              left: Math.max(-100, x - (Math.random() * 100 + 100)),
+              left: Math.max(-100, x - Math.floor(Math.random() * 100 + 100)),
               right: Math.min(
                 this.canvas.width + 100,
-                x + (Math.random() * 100 + 400)
+                x + Math.floor(Math.random() * 100 + 400)
               ),
             },
           })
